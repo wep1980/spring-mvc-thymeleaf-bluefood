@@ -8,9 +8,11 @@
 		        <h1>Cadastro de Cliente</h1>
 		        <br/>
 		
-		        <div id="mensagemDeSucesso">
-		            Aqui vai um exemplo de mensagem de sucesso
-		        </div> <br/> <br/>
+		        <!-- th:if-> se a expressão que tiver dentro for verdadeira a tag aparece, senão ela não aparece(Nem faz parte da pagina) -->
+		        <div id="mensagemDeSucesso" th:if="${msg != null}">
+		            <span th:text="${msg}"></span> <!-- Mostra a mensagem se for true -->
+		        </div>
+		        <br/>
 		
 		        <!-- @{/public/cliente/save}-> em caso de novo cadastro sera direcionado para essa URL(publica), senão edição sera redirecionado para @{/cliente/save} URL(Não publica, para usuario logado) -->
 		        <form method="post" th:object="${cliente}" th:action="${!editMode} ? @{/public/cliente/save} : @{/cliente/save}">
