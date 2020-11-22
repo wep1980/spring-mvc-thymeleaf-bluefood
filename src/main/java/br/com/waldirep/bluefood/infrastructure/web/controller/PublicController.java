@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.waldirep.bluefood.application.ClienteService;
+import br.com.waldirep.bluefood.application.ValidationException;
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 
 // Classe que atende a demanda de URLs que são publicas (Spring security) -- Na mesma tela de criação sera feita a edição que e controlada por uma flag(ativado ou desativado) = boolean(true ou false)
@@ -51,8 +52,13 @@ public class PublicController {
 			                  Errors errors,
 			                  Model model) {
 		if(!errors.hasErrors()) { // Se não tiver erros salva o cliente
-			clienteService.saveCliente(cliente);
-			model.addAttribute("msg", "Cliente gravado com sucesso!"); // Envia a mensagem de sucesso através de "msg"
+			try {
+				clienteService.saveCliente(cliente);
+				model.addAttribute("msg", "Cliente gravado com sucesso!"); // Envia a mensagem de sucesso através de "msg"
+			} catch (ValidationException e) {
+				// rejectValue() -> rejeita a validação de um campo, no caso email, encaixa o erro com toda estrutura de erros criada com Model
+				errors.rejectValue("email", null, e.getMessage());
+			}
 		}
 		ControllerHelper.setEditMode(model, false);
 		return "cliente-cadastro";
