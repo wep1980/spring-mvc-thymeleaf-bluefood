@@ -22,6 +22,8 @@ public class PublicController {
 	@Autowired
 	private ClienteService clienteService;
 	
+	
+	
 	/**
 	 * Model e umas das formas que o spring tem de se comunicar com o HTML que esta sendo criado
 	 * ARQUITETURA MVC
@@ -30,7 +32,6 @@ public class PublicController {
 	 */
 	@GetMapping("/cliente/new")
 	public String newCliente(Model model) {
-		
 		/* Teste
 		Cliente c = new Cliente();
 		c.setNome("waldir");
@@ -42,17 +43,17 @@ public class PublicController {
 		
 	}
 	
+	
+	
 	// cliente -> nome colocado no model -- @Valid -> Faz a validação entre o spring MVC e a BeanValidation APi
 	@PostMapping(path = "/cliente/save")
 	public String saveCliente(@ModelAttribute("cliente") @Valid Cliente cliente, 
 			                  Errors errors,
 			                  Model model) {
-		
 		if(!errors.hasErrors()) { // Se não tiver erros salva o cliente
 			clienteService.saveCliente(cliente);
 			model.addAttribute("msg", "Cliente gravado com sucesso!"); // Envia a mensagem de sucesso através de "msg"
 		}
-		
 		ControllerHelper.setEditMode(model, false);
 		return "cliente-cadastro";
 	}

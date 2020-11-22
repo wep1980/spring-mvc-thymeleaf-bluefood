@@ -35,7 +35,9 @@
 		                </div><br/>
 		
 		                <label for="cpf">CPF:</label><br/>
-		                <input id="cpf" type="text" name="cpf" placeholder="CPF..." th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : ''"/> <br/><br/>
+		                
+		                <!-- onkeydown="return isNumberKey(event);" -> Chamando a função javaScript que e disparada ao ser pressionada uma tecla e retorna o valor para processar o evento -->
+		                <input id="cpf" type="text" name="cpf" placeholder="CPF..." th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : ''" onkeydown="return isNumberKey(event);"/> <br/><br/>
 		                
 		                 <div id="mesagemDeErro" th:if="${#fields.hasErrors('cpf')}">
 		                   <span th:errors="*{cpf}"></span>
@@ -49,14 +51,14 @@
 		                </div><br/>
 		
 		                <label for="telefone">Telefone:</label><br/>
-		                <input id="telefone" type="text" name="telefone" placeholder="Telefone..." th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''"/> <br/><br/>
+		                <input id="telefone" type="text" name="telefone" placeholder="Telefone..." th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''" onkeydown="return isNumberKey(event);"/> <br/><br/>
 		                
 		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('telefone')}">
 		                   <span th:errors="*{telefone}"></span>
 		                </div><br/>
 		
 		                <label for="cep">CEP:</label><br/>
-		                <input id="cep" type="text" name="cep" placeholder="CEP.." th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : ''"/><br/><br/>
+		                <input id="cep" type="text" name="cep" placeholder="CEP.." th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : ''" onkeydown="return isNumberKey(event);"/><br/><br/>
 		                
 		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('cep')}">
 		                   <span th:errors="*{cep}"></span>
