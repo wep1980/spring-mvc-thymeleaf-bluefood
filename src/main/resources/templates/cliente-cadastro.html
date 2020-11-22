@@ -12,8 +12,13 @@
 		            Aqui vai um exemplo de mensagem de sucesso
 		        </div> <br/> <br/>
 		
-		        <form method="post" th:object="${cliente}" th:action="@{/public/cliente/save}"> <!-- th:object="${cliente}" -> mapeamento, pegando o nome da variavel associada na requisição -- "${cliente}" -> cliente e a mesma variavel passada no Model, classe PublicContrller -->
+		        <!-- @{/public/cliente/save}-> em caso de novo cadastro sera direcionado para essa URL(publica), senão edição sera redirecionado para @{/cliente/save} URL(Não publica, para usuario logado) -->
+		        <form method="post" th:object="${cliente}" th:action="${!editMode} ? @{/public/cliente/save} : @{/cliente/save}">
+		        <!-- th:object="${cliente}" -> mapeamento, pegando o nome da variavel associada na requisição -- "${cliente}" -> cliente e a mesma variavel passada no Model, classe PublicContrller --> 
 		            <fieldset>
+		            
+		            <!-- Para editar e necessario capturar o ID do usuario, para que o ID não fique exposto na parte visual(TELA) é utilizado o campo do tipo type="hidden"-->
+		                <input type="hidden" th:field="*{id}"/> <!-- "*{id}"-> Faz o binding para o atributo nome do objeto cliente -->
 		
 		                <label for="nome">Nome:</label><br/>
 		                <input id="nome" type="text" name="nome" placeholder="Nome..." th:field="*{nome}"/> <br/><br/> <!-- Faz o binding para o atributo nome do objeto cliente -->
@@ -37,7 +42,7 @@
 		                <label for="senha">Senha:</label><br/>
 		                <input id="senha" type="password" name="senha" placeholder="Senha..." th:field="*{senha}"/> <br/><br/>
 		
-		                <input type="submit" value="Cadastrar"/>
+		                <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'"/> <!-- ${editMode}-> Recupera o valor do editMode de dentro do model. Se for true realiza o cadastro, senão(false) realiza a alteração -->
 		
 		            </fieldset>
 		        </form><br/>
