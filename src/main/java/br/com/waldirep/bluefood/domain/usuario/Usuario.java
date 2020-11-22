@@ -2,6 +2,8 @@ package br.com.waldirep.bluefood.domain.usuario;
 
 import java.io.Serializable;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -18,6 +20,7 @@ public class Usuario implements Serializable{
 
 	@EqualsAndHashCode.Include // Equals e hashcode -> comparação por ID
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nome;
