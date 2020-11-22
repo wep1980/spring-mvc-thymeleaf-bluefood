@@ -64,12 +64,17 @@
 		                   <span th:errors="*{cep}"></span>
 		                </div><br/>
 		
-		                <label for="senha">Senha:</label><br/>
-		                <input id="senha" type="password" name="senha" placeholder="Senha..." th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"/> <br/><br/>
+		                <div th:if="${!editMode}"> <!-- O campo senha so ficara visivel se for para cadastro de novo usuario -->
+			                <label for="senha">Senha:</label><br/>
+			                <input id="senha" type="password" name="senha" placeholder="Senha..." th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"/> <br/><br/>
+			                
+			                <div id="mesagemDeErro" th:if="${#fields.hasErrors('senha')}">
+			                   <span th:errors="*{senha}"></span>
+			                </div><br/>
+		                </div>
 		                
-		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('senha')}">
-		                   <span th:errors="*{senha}"></span>
-		                </div><br/>
+		                <!-- Para evitar erro na hora do submit por a senha esta vazia, e colocado o valor de value="*" que sera descartado no processo de gravação. o type="hidden" -> oculta o campo de senha da tela do usuario -->
+		                <input type="hidden" name="senha" value="*" th:if="${editMode}"/>
 		
 		                <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'"/> <!-- ${editMode}-> Recupera o valor do editMode de dentro do model. Se for true realiza o cadastro, senão(false) realiza a alteração -->
 		

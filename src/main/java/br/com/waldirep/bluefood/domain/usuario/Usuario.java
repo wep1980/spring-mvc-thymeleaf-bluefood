@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import br.com.waldirep.bluefood.util.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,5 +46,13 @@ public class Usuario implements Serializable{
 	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato inválido")
 	@Column(length = 11, nullable = false) // O telefone e obrigatorio, validação de banco de dados
 	private String telefone;
+	
+	
+	/**
+	 * Metodo que criptografa a senha
+	 */
+	public void encryptPassword() {
+		this.senha = StringUtils.encrypt(this.senha);
+	}
 
 }

@@ -15,11 +15,22 @@ public class ClienteService {
 	
 	
 	
-	
+	/**
+	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
+	 * @param cliente
+	 * @throws ValidationException
+	 */
 	public void saveCliente(Cliente cliente) throws ValidationException {
 		
 		if(!validateEmail(cliente.getEmail(), cliente.getId())) {
 			throw new ValidationException("O e-mail está duplicado");
+		}
+		
+		if(cliente.getId() != null) { // Se for edição
+			Cliente clienteDB = clienteRepository.findById(cliente.getId()).orElseThrow(); // Pegando a senha do cliente no BD
+			cliente.setSenha(clienteDB.getSenha()); // Colocando a senha novamente no cliente
+		}else { // Se for um cliente novo
+			cliente.encryptPassword(); // criptografa a senha
 		}
 		clienteRepository.save(cliente);
 	}
