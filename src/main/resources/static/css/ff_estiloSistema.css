@@ -1,0 +1,298 @@
+/*   INICIO DAS PROPRIEDADES GERIAS DE CONFIGURAÇÃO CSS   */
+
+
+/* Todo projeto com a mesma fonte */
+*
+{
+    font-family: "Verdana";
+}
+
+/* Tudo que estiver dentro de todas as TAGs Body estarão alinhados ao centro e sem margens */
+body
+{
+    text-align: center;
+    margin: 0px 0px 0px 0px;
+}
+
+a /* Todos os links ficaram com a cor preta e sem sublinado */
+{
+    color: #000000;
+    text-decoration: none;
+}
+
+/* Modfica todos os h1 */
+h1
+{
+    color: #1e9bde;
+    background-color: #eeeeee ;
+    text-transform: uppercase;
+    font-size: 20px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 10px solid #1e9bde;
+    border-right: 10px solid #1e9bde;
+    border-top: 2px solid #1e9bde;
+    border-bottom: 2px solid #1e9bde;
+    border-radius: 30px;
+}
+
+fieldset
+{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 2px;
+}
+
+input
+{
+    border: 2px solid #1e9bde;
+    height: 25px;
+    margin-bottom: 6px;
+}
+
+textarea
+{
+    border: 2px solid #1e9bde;
+    height: 40px;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    max-width: 300px;
+    max-height: 100px;
+}
+
+select
+{
+    border: 2px solid #1e9bde;
+    height: 30px;
+    margin-bottom: 6px;
+    width: 60px;
+    padding-left: 4px;
+}
+
+table
+{
+margin-left: auto;
+margin-right: auto;
+background-color: #ffffff;
+font-size: 14px;
+border-spacing: 1px;
+}
+
+/* Cabeçalho da tabela */
+th
+{
+    background-color: #1e9bde;
+    color: #ffffff;
+    text-transform: uppercase;
+    padding: 3px;
+}
+
+/* Efeito de cor intercalado entre as linhas da tabela , linhas pares */
+tr:nth-child(even)
+{
+background-color: #dddddd;
+}
+
+/* Efeito de cor intercalado entre as linhas da tabela , linhas impar*/
+tr:nth-child(odd)
+{
+background-color: #ffffff;
+}
+
+td
+{
+padding: 5px;
+}
+
+input[type=text],
+input[type=password]
+{
+    font-size: 16px;
+    width: 160px;
+    padding-left: 5px;
+}
+
+input[type=button],
+input[type=submit]
+{
+background-color: #1e9bde;
+border-bottom: 3px solid #0153b0;
+border-top: 1px solid #0153b0;
+border-left: 1px solid #0153b0;
+border-right: 1px solid #0153b0;
+color: #ffffff;
+font-weight: bold;
+text-transform: uppercase;
+border-radius: 5px;
+padding: 3px 8px;
+}
+
+input[type=button]:hover,
+input[type=submit]:hover
+{
+    background-color: #69c5ee;
+    border-color: #1e9bde;
+}
+
+/* Ao passar o mouse em cima a palavra ficara sublinhada */
+a:hover
+{
+    text-decoration: underline;
+}
+
+
+/*   FIM DAS PROPRIEDADES GERAIS DE CONFIGURAÇÃO CSS    */
+
+/*  INICIO DAS PROPRIEDADES CUSTOMIZADAS DE CONFIGURAÇÃO CSS    */
+
+
+/* LOGO INICIO. A Cor de fundo e altura modificados */
+div#divLogoSistema
+{
+    background-color: #1e9bde;
+    height: 90px;
+}
+
+
+span#spanAuxiliarDeAlinhamentoVertical
+{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+img#imgLogoSistema
+{
+    height: 60%;
+    vertical-align: middle;
+}
+
+/* LOGO FIM  */
+
+
+/* Imagem de usuario */
+img#imgIconeUsuario
+{
+width: 100px;
+}
+
+div#mesagemDeErro
+{
+    background-color: #d40000;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    color: #ffffff;
+    padding: 6px;
+}
+
+div#mensagemDeSucesso
+{
+    background-color: #0baf00;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    color: #ffffff;
+    padding: 6px;
+
+}
+
+div#divUsuarioLogado
+{
+    background-color: #7bc2e5;
+    color: #ffffff;
+    line-height: 40px;
+}
+
+img#imgIconeCarrinho
+{
+    height: 70px;
+}
+
+div#divCategoriasComidaOpcao
+{
+    width: 20%;
+    height: 130px;
+    background-color: #ffffff;
+    float: left;
+    padding-top: 45px;
+}
+
+/* Alinha todos os elementos na horizontal(Justificado) independente da quantidade */
+div#divCategoriasComidaGeral
+{
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between ;
+}
+
+img#imgCategoriaComida
+{
+    height: 50%;
+}
+
+
+/* Marca o butão selecionado(ativo) */
+input#inputSelecionado
+{
+    background-color: #69c5ee;
+    border-color: #1e9bde;
+}
+
+img#imgRestauranteOpcao
+{
+    height: 130px;
+}
+
+span#restauranteOpcaoTitulo
+{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+div#divRestauranteOpcao
+{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+img#imgRestaurantePedido
+{
+width: 200px;
+padding-top: 15px;
+}
+
+
+/* Avisa quando um campo foi digitado errado*/
+.inputError
+{
+    border: 2px solid #ff2828;
+}
+
+fieldset#fieldsetFiltros
+{
+    border-width: 2px;
+    border-radius: 10px;
+    padding-top: 15px;
+}
+
+fieldset#fildsetPadrao
+{
+    border-radius: 10px;
+    border-width: 2px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+div#divClienteCarrinhoPedido
+{
+
+}
+
