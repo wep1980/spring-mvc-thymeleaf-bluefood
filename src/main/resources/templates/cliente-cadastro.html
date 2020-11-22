@@ -23,26 +23,51 @@
 		                <input type="hidden" th:field="*{id}"/> <!-- "*{id}"-> Faz o binding para o atributo nome do objeto cliente -->
 		
 		                <label for="nome">Nome:</label><br/>
-		                <input id="nome" type="text" name="nome" placeholder="Nome..." th:field="*{nome}"/> <br/><br/> <!-- Faz o binding para o atributo nome do objeto cliente -->
+		                
+		                 <!--  th:field="*{nome}" -> Faz o binding para o atributo nome do objeto cliente --- th:classappend="" -> Adiciona um novo class. Se existir erro de validação no nome sera chamada o class(CSS)="inputError" , senão não chama nada -->
+		                <input id="nome" type="text" name="nome" placeholder="Nome..." th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'inputError' : ''"/> <br/><br/>
 		
-		                <div id="mesagemDeErro">
-		                    Aqui vai um exemplo de mensagem de erro
+		                <!-- "${#fields.hasErrors('nome')} -> Captura os erros do campo nome -->
+		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('nome')}">
+		                
+		                <!-- Mostra os erros que existirem no atributo nome -->
+		                   <span th:errors="*{nome}"></span>
 		                </div><br/>
 		
 		                <label for="cpf">CPF:</label><br/>
-		                <input id="cpf" type="text" name="cpf" placeholder="CPF..." th:field="*{cpf}"/> <br/><br/>
+		                <input id="cpf" type="text" name="cpf" placeholder="CPF..." th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : ''"/> <br/><br/>
+		                
+		                 <div id="mesagemDeErro" th:if="${#fields.hasErrors('cpf')}">
+		                   <span th:errors="*{cpf}"></span>
+		                 </div><br/>
 		
 		                <label for="email">E-mail:</label><br/>
-		                <input id="email" type="text" name="email" placeholder="E-mail..." th:field="*{email}"/> <br/><br/>
+		                <input id="email" type="text" name="email" placeholder="E-mail..." th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'inputError' : ''"/> <br/><br/>
+		                
+		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('email')}">
+		                   <span th:errors="*{email}"></span>
+		                </div><br/>
 		
 		                <label for="telefone">Telefone:</label><br/>
-		                <input id="telefone" type="text" name="telefone" placeholder="Telefone..." th:field="*{telefone}"/> <br/><br/>
+		                <input id="telefone" type="text" name="telefone" placeholder="Telefone..." th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''"/> <br/><br/>
+		                
+		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('telefone')}">
+		                   <span th:errors="*{telefone}"></span>
+		                </div><br/>
 		
 		                <label for="cep">CEP:</label><br/>
-		                <input id="cep" type="text" name="cep" placeholder="CEP.." th:field="*{cep}"/><br/><br/>
+		                <input id="cep" type="text" name="cep" placeholder="CEP.." th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : ''"/><br/><br/>
+		                
+		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('cep')}">
+		                   <span th:errors="*{cep}"></span>
+		                </div><br/>
 		
 		                <label for="senha">Senha:</label><br/>
-		                <input id="senha" type="password" name="senha" placeholder="Senha..." th:field="*{senha}"/> <br/><br/>
+		                <input id="senha" type="password" name="senha" placeholder="Senha..." th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"/> <br/><br/>
+		                
+		                <div id="mesagemDeErro" th:if="${#fields.hasErrors('senha')}">
+		                   <span th:errors="*{senha}"></span>
+		                </div><br/>
 		
 		                <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'"/> <!-- ${editMode}-> Recupera o valor do editMode de dentro do model. Se for true realiza o cadastro, senão(false) realiza a alteração -->
 		
