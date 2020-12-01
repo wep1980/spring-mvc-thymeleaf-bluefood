@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.waldirep.bluefood.application.ClienteService;
 import br.com.waldirep.bluefood.application.ValidationException;
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
+import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
 
 // Classe que atende a demanda de URLs que são publicas (Spring security) -- Na mesma tela de criação sera feita a edição que e controlada por uma flag(ativado ou desativado) = boolean(true ou false)
@@ -23,6 +24,9 @@ public class PublicController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 	
 	
 	
@@ -55,6 +59,7 @@ public class PublicController {
 	
 		model.addAttribute("restaurante", new Restaurante()); // Adiciona o objeto
 		ControllerHelper.setEditMode(model, false); // false indica que sera um novo cliente -- True indica que sera edição de um cliente
+		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model); // Carregando a lista de categorias
 		return "restaurante-cadastro";
 		
 	}
