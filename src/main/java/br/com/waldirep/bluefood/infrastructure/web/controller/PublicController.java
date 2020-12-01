@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.waldirep.bluefood.application.ClienteService;
+import br.com.waldirep.bluefood.application.RestauranteService;
 import br.com.waldirep.bluefood.application.ValidationException;
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
@@ -24,6 +25,9 @@ public class PublicController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private RestauranteService restauranteService;
 	
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
@@ -83,5 +87,49 @@ public class PublicController {
 		ControllerHelper.setEditMode(model, false);
 		return "cliente-cadastro";
 	}
+	
+	
+	
+	@PostMapping(path = "/restaurante/save")
+	public String saveRestaurante(@ModelAttribute("restaurante") @Valid Restaurante restaurante, 
+			                  Errors errors,
+			                  Model model) {
+		if(!errors.hasErrors()) { // Se não tiver erros salva o cliente
+			try {
+				restauranteService.saveRestaurante(restaurante);
+				model.addAttribute("msg", "Restaurante gravado com sucesso!"); // Envia a mensagem de sucesso através de "msg"
+			} catch (ValidationException e) {
+				// rejectValue() -> rejeita a validação de um campo, no caso email, encaixa o erro com toda estrutura de erros criada com Model
+				errors.rejectValue("email", null, e.getMessage());
+			}
+		}
+		ControllerHelper.setEditMode(model, false);
+		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
+		return "restaurante-cadastro";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

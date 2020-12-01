@@ -18,6 +18,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import br.com.waldirep.bluefood.domain.usuario.Usuario;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,6 +42,9 @@ public class Restaurante extends Usuario implements Serializable{
 	
 	@Size(max = 80)
 	private String logotipo;
+	
+	
+	private transient MultipartFile logotipoFile; // transient -> o arquivo so fica armazenado em memoria, não armazena na tabela
 	
 	@NotNull(message = "A taxa de entrega não pode ser vazia")
 	@Min(0) // Valor minimo de uma taxa de entrega 
@@ -66,4 +71,21 @@ public class Restaurante extends Usuario implements Serializable{
 	@Size(min = 1, message = "O restaurante precisa ter pelo ao menos uma categoria")
 	@ToString.Exclude // Exclui do lombok da geração do toString a relação do restaurante com as categorias
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
+	
+	
+	
+	 public void setLogotipoFileName() {
+		 
+		 if(getId() == null) {
+			 throw new IllegalStateException("É preciso primeiro gravar o registro");
+		 }
+		 // "%04d" -> completa com 0 a esquerda ate que o tamanho fique 4
+		 //TODO: Trocar forma de ler extensão
+		 this.logotipo = String.format("%04d-logo.%s", getId(), ".png");
+	 }
+	
+	
+	
+	
+	
 }

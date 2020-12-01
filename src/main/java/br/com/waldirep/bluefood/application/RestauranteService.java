@@ -1,10 +1,12 @@
 package br.com.waldirep.bluefood.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
 import br.com.waldirep.bluefood.domain.restaurante.RestauranteRepository;
 
+@Service
 public class RestauranteService {
 	
 	
@@ -14,7 +16,7 @@ public class RestauranteService {
 	
 	/**
 	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
-	 * @param cliente
+	 * @param restaurante
 	 * @throws ValidationException
 	 */
 	public void saveRestaurante(Restaurante restaurante) throws ValidationException {
@@ -23,8 +25,18 @@ public class RestauranteService {
 			throw new ValidationException("O e-mail está duplicado");
 		}
 		
+		if(restaurante.getId() != null) { // Se for edição
+			Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow(); // Pegando a senha do restaurante no BD
+			restaurante.setSenha(restauranteDB.getSenha()); // Colocando a senha novamente no restaurante
+			
+		}else { // Se for um restaurante novo
+			restaurante.encryptPassword(); // criptografa a senha
+			restaurante = restauranteRepository.save(restaurante);
+			restaurante.setLogotipoFileName(); // Colocando o nome da imagem
+			//TODO: Upload!!
+		}
 		
-		restauranteRepository.save(restaurante);
+		
 	}
 	
 	
