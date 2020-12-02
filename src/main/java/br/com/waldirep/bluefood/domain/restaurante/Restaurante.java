@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.waldirep.bluefood.domain.usuario.Usuario;
+import br.com.waldirep.bluefood.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -80,8 +81,7 @@ public class Restaurante extends Usuario implements Serializable{
 			 throw new IllegalStateException("É preciso primeiro gravar o registro");
 		 }
 		 // "%04d" -> completa com 0 a esquerda ate que o tamanho fique 4
-		 //TODO: Trocar forma de ler extensão
-		 this.logotipo = String.format("%04d-logo.%s", getId(), ".png");
+		 this.logotipo = String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension()); //Forma o nome completo da imagem
 	 }
 	
 	

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}"> <!--Pega a pagina de layout e monta com a de restaurante -->
 
 	<body>
-		<div layout:fragment="content">
+		<div layout:fragment="content"> <!-- Adiciona esse conteudo na pagina de layout -->
 			<div>
 				<h1>Cadastro de Restaurante</h1>
 
@@ -12,6 +12,7 @@
 					<span th:text="${msg}"></span><br />
 				</div>
 
+                <!-- enctype="multipart/form-data" ->  tipo de arquivo para upload-->
 				<form method="post" th:object="${restaurante}" th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" enctype="multipart/form-data">
 					<fieldset>
 						<input type="hidden" th:field="*{id}" />
@@ -62,6 +63,9 @@
 						<input type="file" id="logotipo" name="logotipo" placeholder="Selecionar..." th:field="*{logotipoFile}"><br><br>
 
 						<label for="categoria">Categoria de comida: </label><br />	
+						
+						<!--  multiple="multiple" -> permite selecionar varios itens -- th:field="*{categorias}" -> fazendo mapeamento -- th:each="categoria : ${categorias}" -> percorre todos os elementos da lista e atribui cada um a categoria.
+						      th:value="${categoria.id}" -> valor que vai para a base de dados -- th:text="${categoria.nome}" -> valor que aparece na tela -->
 						<select name="categoria" id="categoria" multiple="multiple" th:field="*{categorias}" style="width: 115px; height: 90px;" th:classappend="${#fields.hasErrors('categorias')} ? 'inputError' : ''">
 							<option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nome}"></option>
 						</select><br />

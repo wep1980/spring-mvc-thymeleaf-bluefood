@@ -13,6 +13,8 @@ public class RestauranteService {
 	@Autowired
 	private RestauranteRepository restauranteRepository;
 	
+	@Autowired
+	private ImageService imageService;
 	
 	/**
 	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
@@ -33,7 +35,7 @@ public class RestauranteService {
 			restaurante.encryptPassword(); // criptografa a senha
 			restaurante = restauranteRepository.save(restaurante);
 			restaurante.setLogotipoFileName(); // Colocando o nome da imagem
-			//TODO: Upload!!
+			imageService.uploadLogotipo(restaurante.getLogotipoFile(), restaurante.getLogotipo());
 		}
 		
 		
