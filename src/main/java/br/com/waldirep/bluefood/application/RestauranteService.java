@@ -64,7 +64,7 @@ public class RestauranteService {
 			}
 			
 		}
-		return false;
+		return true;
 	}
 
 }
