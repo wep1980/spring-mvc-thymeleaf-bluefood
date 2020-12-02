@@ -2,9 +2,12 @@ package br.com.waldirep.bluefood.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 import br.com.waldirep.bluefood.domain.cliente.ClienteRepository;
+import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
+import br.com.waldirep.bluefood.domain.restaurante.RestauranteRepository;
 
 @Service
 public class ClienteService {
@@ -14,12 +17,17 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 	
 	
+	@Autowired
+	private RestauranteRepository restauranteRepository;
+	
+	
 	
 	/**
 	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
 	 * @param cliente
 	 * @throws ValidationException
 	 */
+	@Transactional // executado em contexto de transação no banco de dados
 	public void saveCliente(Cliente cliente) throws ValidationException {
 		
 		if(!validateEmail(cliente.getEmail(), cliente.getId())) {
@@ -50,6 +58,11 @@ public class ClienteService {
 	 * @return
 	 */
 	private boolean validateEmail(String email, Integer id) {
+		
+		Restaurante restaurante = restauranteRepository.findByEmail(email);
+		if(restaurante != null) {
+			return false;
+		}
 		
 		Cliente clienteEmail = clienteRepository.findByEmail(email);
 		if(clienteEmail != null) { // Se existir o email (Foi encontrado um cliente com o mesmo email) retorna false

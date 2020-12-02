@@ -28,6 +28,7 @@ public class CategoriaRestaurante implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include // O Id e utilizado para verificar os elementos no equals e hashcode
 	private Integer id;
 	
 	@NotNull
