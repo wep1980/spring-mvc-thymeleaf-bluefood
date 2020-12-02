@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.waldirep.bluefood.domain.usuario.Usuario;
+import br.com.waldirep.bluefood.infrastructure.web.validator.UploadConstraint;
 import br.com.waldirep.bluefood.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,7 +45,7 @@ public class Restaurante extends Usuario implements Serializable{
 	@Size(max = 80)
 	private String logotipo;
 	
-	
+	@UploadConstraint(acceptedTypes = {FileType.PNG, FileType.JPG}, message = "O arquivo não é um arquivo de imagem válido") // Anotação de validação customizada
 	private transient MultipartFile logotipoFile; // transient -> o arquivo so fica armazenado em memoria, não armazena na tabela
 	
 	@NotNull(message = "A taxa de entrega não pode ser vazia")
