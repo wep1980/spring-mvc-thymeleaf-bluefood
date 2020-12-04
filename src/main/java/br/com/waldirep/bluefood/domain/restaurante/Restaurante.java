@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -74,6 +75,9 @@ public class Restaurante extends Usuario implements Serializable{
 	@ToString.Exclude // Exclui do lombok da geração do toString a relação do restaurante com as categorias
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 	
+	
+	@OneToMany(mappedBy = "restaurante")
+	private Set<ItemCardapio> itemCardapio = new HashSet<ItemCardapio>(0);
 	
 	
 	 public void setLogotipoFileName() {
