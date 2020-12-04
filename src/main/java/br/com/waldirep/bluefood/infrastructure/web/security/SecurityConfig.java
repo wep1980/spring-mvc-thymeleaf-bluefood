@@ -1,11 +1,23 @@
 package br.com.waldirep.bluefood.infrastructure.web.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration // avisa ao spring que e uma classe para configuração
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	
+	/**
+	 * Metodo que cria uma instancia de AuthenticationSuccessHandler
+	 * @return
+	 */
+	@Bean // Produz instancia e é utilizada quando o spring necessita
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new AuthenticationSuccessHandlerImpl();
+	}
 	
 	/**
 	 * Configura o processo de autenticação e autorização
@@ -22,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		        .formLogin() // Sera usado um formLogin para autenticação
 		           .loginPage("/login") // pagina de login
 		           .failureUrl("/login-error") // pagina de erro ao fazer login
-		          // .successHandler(null) // Objeto chamado quando a autenticação funcionar
+		           .successHandler(authenticationSuccessHandler()) // Objeto chamado quando a autenticação funcionar
 		           .permitAll()
 		        .and()
 		           .logout().logoutUrl("/logout") // pagina de logout
