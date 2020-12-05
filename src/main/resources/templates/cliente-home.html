@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}"> <!--Pega a pagina de layout e monta com a de login-->
+	
+	<body>
+	   <div layout:fragment="content"> <!-- Adiciona esse conteudo na pagina de layout -->
+    <div>
+        <h1>É hora de comer</h1>
+        <form method="POST" action="">
+            <fieldset id="fieldsetFiltros">
+                <input type="text" name="busca" placeholder="Buscar por...">
+                <input type="button" value="Procurar" />
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="divCategoriasComidaGeral">
+
+        <div id="divCategoriasComidaOpcao">
+            <a href="#">
+                <img src="images/ff_categoriaChurrasco.png" id="imgCategoriaComida" />
+                <br />
+                <span>Churrasco</span>
+            </a>
+        </div>
+
+        <div id="divCategoriasComidaOpcao">
+            <a href="#">
+                <img src="images/ff_categoriaHamburguer.png"  id="imgCategoriaComida" />
+                <br />
+                <span>Hamburguer</span>
+            </a>
+        </div>
+
+        <div id="divCategoriasComidaOpcao">
+            <a href="#">
+                <img src="images/ff_categoriaPizza.png"  id="imgCategoriaComida"/>
+                <br />
+                <span>Pizza</span>
+            </a>
+        </div>
+
+        <div id="divCategoriasComidaOpcao">
+            <a href="#">
+                <img src="images/ff_categoriaSalada.png"  id="imgCategoriaComida"/>
+                <br />
+                <span>Salada</span>
+            </a>
+        </div>
+
+        <div id="divCategoriasComidaOpcao">
+            <a href="#">
+                <img src="images/ff_categoriaSobremesa.png"  id="imgCategoriaComida"/>
+                <br />
+                <span>Sobremesa</span>
+            </a>
+        </div>
+
+    </div>
+
+    <div style="padding-bottom: 15px;">
+        <h1>Últimos pedidos</h1>
+        <br/>
+        <input type="button" value="#15456 McBlunalds"><br/>
+        <input type="button" value="#89856 Free Food"><br/>
+        <input type="button" value="#72132 Hard blue"><br/>
+    </div>
+
+    <div style="padding-bottom: 100px;">
+        <h1>Conta</h1>
+        <br/>
+        <input type="button" value="Meus dados" th:onclick="'location.href=\'' + @{/cliente/edit} + '\';'"> <br/>
+        <input type="button" value="Sair" th:onclick="'location.href=\'' + @{/logout} + '\';'"><br/>
+    </div>
+ </div>
+
+
+</body>
+
+</html>
