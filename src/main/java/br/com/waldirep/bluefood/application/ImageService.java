@@ -1,6 +1,7 @@
 package br.com.waldirep.bluefood.application;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,28 @@ import br.com.waldirep.bluefood.util.IOUtils;
 public class ImageService {
 	
 	
-	@Value("${bluefood.files.logotipo}")
+	/**
+	 * Diretirio para logotipos
+	 */
+	@Value("${bluefood.files.logotipo}") // Propriedade criada no application.properties
 	private String logotiposDir; // Atributo de serviço
+	
+	
+	/**
+	 * Diretirio para categorias
+	 */
+	@Value("${bluefood.files.categoria}") // Propriedade criada no application.properties
+	private String categoriasDir; // Atributo de serviço
+	
+	
+	/**
+	 * Diretirio para comidas
+	 */
+	@Value("${bluefood.files.comida}") // Propriedade criada no application.properties
+	private String comidasDir; // Atributo de serviço
+	
+	
+	
 	
 	public void uploadLogotipo(MultipartFile multipartFile, String fileName) {
 		try {
@@ -23,4 +44,54 @@ public class ImageService {
 		}
 	}
 
+	
+	
+	/**
+	 * Metodo que verifica o tipo da imagem, verifica qual diretorio esta a imagem, pega a imagem trasnforma em um array[] de bytes e retorna o array de bytes para o ImageController
+	 * @param type -> categoria, comida ou logotipo
+	 * Como e um serviço não sera lançada uma IOException e sim ApplicationServiceException
+	 * @return
+	 */
+	public byte[] getBytes(String type, String imgName) {
+		
+		try {
+			
+		String dir;
+		
+		if("comida".equals(type)) {
+			dir = comidasDir;
+			
+		}else if("logotipo".equals(type)) {
+			dir = logotiposDir;
+			
+		}else if("categoria".equals(type)) {
+			dir = categoriasDir;
+			
+		}else {
+			throw new Exception(type + "Não é um tipo de imagem válido");
+		}
+		
+		return IOUtils.getBytes(Paths.get(dir, imgName)); // Vai vir do banco de dados
+		
+		} catch (Exception e) {
+			throw new ApplicationServiceException(e);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

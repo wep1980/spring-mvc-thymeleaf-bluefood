@@ -1,8 +1,11 @@
 package br.com.waldirep.bluefood.infrastructure.web.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,6 +18,8 @@ import br.com.waldirep.bluefood.application.ClienteService;
 import br.com.waldirep.bluefood.application.ValidationException;
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 import br.com.waldirep.bluefood.domain.cliente.ClienteRepository;
+import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestaurante;
+import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.waldirep.bluefood.util.SecurityUtils;
 
 /**
@@ -33,22 +38,38 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
+	@Autowired
+	private CategoriaRestauranteRepository categoriaRestauranteRepository;
+	
 
+	/**
+	 * Encontra todas as categorias
+	 * Recebe um model como parametro
+	 * @return
+	 */
 	@GetMapping(path = "/home")
-	public String home() {
+	public String home(Model model) {
+		
+		List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome")); // Busca todas as categorias ordenadas por nome
+		model.addAttribute("categorias", categorias);
+		
 		return "cliente-home";
 	}
+	
 	
 
 	@GetMapping("/edit")
 	public String edit(Model model) {
+		
 		Integer clienteId = SecurityUtils.loggedCliente().getId(); // pegando o Id do cliente logado
 		Cliente cliente = clienteRepository.findById(clienteId).orElseThrow(); // .orElseThrow() -> Lança a excessão
 																				// caso o cliente não exista
 		model.addAttribute("cliente", cliente);
 		ControllerHelper.setEditMode(model, true);
+		
 		return "cliente-cadastro";
 	}
+	
 	
 
 	@PostMapping("/save")

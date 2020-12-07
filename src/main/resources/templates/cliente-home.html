@@ -16,46 +16,16 @@
 
     <div id="divCategoriasComidaGeral">
 
-        <div id="divCategoriasComidaOpcao">
+        <!-- th:each="" -> Vai iterar sobre cada categoria -- ${categorias} -> Lista de categorias que esta no Model -->
+        <div id="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
             <a href="#">
-                <img src="images/ff_categoriaChurrasco.png" id="imgCategoriaComida" />
+                
+                <!-- o tipo da imagem e categoria, o nome da imagem esta dentro do objeto da categoria. + ${categoria.imagem} -> Concatenando -->
+                <img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComida" />
                 <br />
-                <span>Churrasco</span>
+                <span th:text="${categoria.nome}"></span>
             </a>
         </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/ff_categoriaHamburguer.png"  id="imgCategoriaComida" />
-                <br />
-                <span>Hamburguer</span>
-            </a>
-        </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/ff_categoriaPizza.png"  id="imgCategoriaComida"/>
-                <br />
-                <span>Pizza</span>
-            </a>
-        </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/ff_categoriaSalada.png"  id="imgCategoriaComida"/>
-                <br />
-                <span>Salada</span>
-            </a>
-        </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/ff_categoriaSobremesa.png"  id="imgCategoriaComida"/>
-                <br />
-                <span>Sobremesa</span>
-            </a>
-        </div>
-
     </div>
 
     <div style="padding-bottom: 15px;">
