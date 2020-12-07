@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html  xmlns="http://www.w3.org/1999/xhtml"
-	   xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}"> <!--Pega a pagina de layout e monta com a de login-->
+	   xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/cliente/home}"> <!--Pega a pagina de layout e monta com a de login -- th:with="link=@{/cliente/home}" -> passa variaveis para o layout e o valor dela -->
 	
 	<body>
-	   <div layout:fragment="content"> <!-- Adiciona esse conteudo na pagina de layout -->
+	   <!-- Adiciona esse conteudo na pagina de layout -->
+	   <div layout:fragment="content"> 
     <div>
         <h1>É hora de comer</h1>
         <form method="POST" action="">

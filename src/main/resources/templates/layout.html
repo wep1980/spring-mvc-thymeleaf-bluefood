@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html  xmlns="http://www.w3.org/1999/xhtml"
-	   xmlns:th="http://www.thymeleaf.org">
+	   xmlns:th="http://www.thymeleaf.org"
+	   >
+	  
 
 <head>
     <meta charset="UTF-8"/>
@@ -14,10 +16,20 @@
     <header>
         <div id="divLogoSistema">
             <span id="spanAuxiliarDeAlinhamentoVertical"></span>
-            <a th:href="@{/}">
+            
+            <!-- Se o link for null funcionara a / senão coloca o valor do link. Ao clicar na logo sera redirecionado para a pagina cliente-home. @{/} -> redireciona para a pagina de login  -->
+            <a th:href="${link} == null ? @{/} : ${link}">
                 <img id="imgLogoSistema" th:src="@{/images/bf_logotipoSistema.png}"/>
             </a>
         </div>
+        
+         <!-- th:if="${#authentication.principal != 'anonymousUser'}" -> Ele so vai aparecer se o usuario estiver logado --> 
+         <div id="divUsuarioLogado" th:if="${#authentication.principal != 'anonymousUser'}">
+         
+                <!-- #authentication.principal -> Representa o objeto da autenticação do usuario -- .principal -> Dentro do #authentication existe um getPrincipal(LoggedUser) -- PEGA O NOME DO USUARIO QUE ESTA LOGADO -->
+				<span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
+        </div>
+        
     </header>
     <br/>
     <br/>
