@@ -7,10 +7,13 @@
 	   <div layout:fragment="content"> 
     <div>
         <h1>É hora de comer</h1>
-        <form method="POST" action="">
+        
+        <form method="get" th:object="${searchFilter}" th:action="@{/cliente/search}" >
             <fieldset id="fieldsetFiltros">
-                <input type="text" name="busca" placeholder="Buscar por...">
-                <input type="button" value="Procurar" />
+            
+                <!-- th:field="*{texto}" -> Quando o formulario for submetido sera capturado o valor digitado na caixa de texto e vai colocar dentro do atributo texto do objeto searchFilter-->            
+                <input type="text" th:field="*{texto}" placeholder="Buscar por...">
+                <input type="submit" value="Procurar" />
             </fieldset>
         </form>
     </div>

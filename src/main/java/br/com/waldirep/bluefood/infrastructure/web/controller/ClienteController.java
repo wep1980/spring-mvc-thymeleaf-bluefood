@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.waldirep.bluefood.application.ClienteService;
+import br.com.waldirep.bluefood.application.RestauranteService;
 import br.com.waldirep.bluefood.application.ValidationException;
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 import br.com.waldirep.bluefood.domain.cliente.ClienteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestaurante;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
+import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
+import br.com.waldirep.bluefood.domain.restaurante.SearchFilter;
 import br.com.waldirep.bluefood.util.SecurityUtils;
 
 /**
@@ -41,6 +44,9 @@ public class ClienteController {
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 	
+	@Autowired
+	private RestauranteService restauranteService;
+	
 
 	/**
 	 * Encontra todas as categorias
@@ -52,7 +58,7 @@ public class ClienteController {
 		
 		List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome")); // Busca todas as categorias ordenadas por nome
 		model.addAttribute("categorias", categorias);
-		
+		model.addAttribute("searchFilter", new SearchFilter()); // Disponibiliza o searchFilter na tela home, o atributo texto sera colocado dentro do searchFilter
 		return "cliente-home";
 	}
 	
@@ -91,5 +97,38 @@ public class ClienteController {
 		return "cliente-cadastro";
 
 	}
+	
+	
+	
+	@GetMapping(path = "/search")
+	public String search (@ModelAttribute("searchFilter") SearchFilter filter,
+			              Model model) {
+		
+		List<Restaurante> restaurantes = restauranteService.search(filter); // Listando os restaurantes
+		model.addAttribute("restaurantes", restaurantes);
+		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model); // Listando as categorias
+		
+		return "cliente-busca";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
