@@ -104,9 +104,13 @@ public class ClienteController {
 	public String search (@ModelAttribute("searchFilter") SearchFilter filter,
 			              Model model) {
 		
+		filter.processFilter(); // Processa o tipo de busca, por categoria ou texto
+		
 		List<Restaurante> restaurantes = restauranteService.search(filter); // Listando os restaurantes
 		model.addAttribute("restaurantes", restaurantes);
 		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model); // Listando as categorias
+		
+		model.addAttribute("searchFilter", filter); // recolocando dentro do model para que a proxima tela possa acessar
 		
 		return "cliente-busca";
 	}

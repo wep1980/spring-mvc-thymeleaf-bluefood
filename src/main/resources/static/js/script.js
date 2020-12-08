@@ -10,3 +10,21 @@ function isNumberKey(evt){
 	}
 	return false;
 }
+
+/**
+Função javaScript que define o tipo de busca que fera feita
+ */
+function searchRes(categoriaId){
+	
+	var t = document.getElementById("searchType"); // Captura o campo da tela
+	
+	// Se foi passado uma categoriaId a busca e por categoria, se a busca for pelo campo de texto é texto
+	if(categoriaId == null){
+		t.value = "Texto"; // Texto -> enum da classe SearchType
+	} else {
+		t.value = "Categoria"; // Categoria -> enum da classe SearchType
+		document.getElementById("categoriaId").value = categoriaId;
+	}
+	
+	document.getElementById("form").submit();
+}

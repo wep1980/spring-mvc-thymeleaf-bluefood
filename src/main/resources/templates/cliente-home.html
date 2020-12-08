@@ -5,32 +5,45 @@
 	<body>
 	   <!-- Adiciona esse conteudo na pagina de layout -->
 	   <div layout:fragment="content"> 
-    <div>
-        <h1>É hora de comer</h1>
-        
-        <form method="get" th:object="${searchFilter}" th:action="@{/cliente/search}" >
-            <fieldset id="fieldsetFiltros">
-            
-                <!-- th:field="*{texto}" -> Quando o formulario for submetido sera capturado o valor digitado na caixa de texto e vai colocar dentro do atributo texto do objeto searchFilter-->            
-                <input type="text" th:field="*{texto}" placeholder="Buscar por...">
-                <input type="submit" value="Procurar" />
-            </fieldset>
-        </form>
-    </div>
-
-    <div id="divCategoriasComidaGeral">
-
-        <!-- th:each="" -> Vai iterar sobre cada categoria -- ${categorias} -> Lista de categorias que esta no Model -->
-        <div id="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
-            <a href="#">
-                
-                <!-- o tipo da imagem e categoria, o nome da imagem esta dentro do objeto da categoria. + ${categoria.imagem} -> Concatenando -->
-                <img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComida" />
-                <br />
-                <span th:text="${categoria.nome}"></span>
-            </a>
-        </div>
-    </div>
+   
+   <!-- id="form" -> nome do formulario, sera acessado por funções javaScript --> 	   
+   <form method="get" th:object="${searchFilter}" th:action="@{/cliente/search}" id="form">
+   
+	                <!-- id="searchType" -> nome do input, sera acessado por funções javaScript -->             
+	                <input id="searchType" type="hidden" th:field="*{searchType}"/> <!-- Campo de controle do filter para busca de texto, iterage com javaScript, não aparece na tela -->
+	                
+	                 <!-- id="categoriaId" -> nome do input, sera acessado por funções javaScript -->             
+	                <input id="categoriaId" type="hidden" th:field="*{categoriaId}"/> <!-- Campo de controle do filter para busca de texto, iterage com javaScript, não aparece na tela -->
+	    <div>
+	        <h1>É hora de comer!</h1>
+	        
+	            <fieldset id="fieldsetFiltros">
+	            
+	                <!-- th:field="*{texto}" -> Quando o formulario for submetido sera capturado o valor digitado na caixa de texto e vai colocar dentro do atributo texto do objeto searchFilter-->            
+	                <input type="text" th:field="*{texto}" placeholder="Buscar por...">
+	                
+	                <!-- onclick="searchRes(null);" -> função javaScript generica que identifica se a busca e por texto ou categoria para pesquisa e faz o submit -- NÃO FOI NECESSARIO O th:onclick PORQUE FOI UMA CHAMADA DIRETA DO JAVASCRIPT -->
+	                <input type="button" value="Procurar" onclick="searchRes(null);"/>
+	            </fieldset>
+	        
+	    </div>
+	
+	    <div id="divCategoriasComidaGeral">
+	
+	        <!-- th:each="" -> Vai iterar sobre cada categoria -- ${categorias} -> Lista de categorias que esta no Model -->
+	        <div id="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
+	        
+	            <!-- submit do formulario atraves de um link -- AQUI E UTILIZADO O th:onclick="" PORQUE SERA CONCATENADO O ID DA CATEGORIA -->
+	            <a href="#" th:onclick="'searchRes(' + ${categoria.id} + ');'" >
+	                
+	                <!-- o tipo da imagem e categoria, o nome da imagem esta dentro do objeto da categoria. + ${categoria.imagem} -> Concatenando -->
+	                <img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComida" />
+	                <br />
+	                <span th:text="${categoria.nome}"></span>
+	            </a>
+	        </div>
+	    </div>
+    </form>
 
     <div style="padding-bottom: 15px;">
         <h1>Últimos pedidos</h1>
