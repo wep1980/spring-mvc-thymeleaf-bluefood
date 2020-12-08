@@ -20,7 +20,7 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Intege
 	
 	
 	/**
-	 * Metodo que retorna todas as categorias de acordo com o restaurante selecionado
+	 * Metodo que retorna todas os restaurantes de acordo com a categoria passada por parametro
 	 * Procura pelo id da categoria -> Categorias_Id
 	 * @param categoriaId
 	 * @return
