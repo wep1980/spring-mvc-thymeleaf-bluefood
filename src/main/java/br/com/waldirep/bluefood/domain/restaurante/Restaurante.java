@@ -3,10 +3,12 @@ package br.com.waldirep.bluefood.domain.restaurante;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.waldirep.bluefood.domain.usuario.Usuario;
 import br.com.waldirep.bluefood.infrastructure.web.validator.UploadConstraint;
 import br.com.waldirep.bluefood.util.FileType;
+import br.com.waldirep.bluefood.util.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -65,7 +68,7 @@ public class Restaurante extends Usuario implements Serializable{
 	 *  private Set<CategoriaRestaurante> categorias = new HashSet<>(0); -> Criar uma instancia de set, list, arrayList e sempre aconselhavel pois evita erros
 	 *  Relacionamento Bidirecional, assim como de restaurante a gente consegue chegar em categorias, de categoria podemos chegar em restaurantes
 	 */
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER) // Carrega as categorias ao buscar um restaurante
 	@JoinTable(
 			name = "restaurante_has_categoria",
 			joinColumns = @JoinColumn(name = "restaurante_id"),
@@ -80,6 +83,8 @@ public class Restaurante extends Usuario implements Serializable{
 	private Set<ItemCardapio> itemCardapio = new HashSet<ItemCardapio>(0);
 	
 	
+	
+	
 	 public void setLogotipoFileName() {
 		 
 		 if(getId() == null) {
@@ -90,7 +95,38 @@ public class Restaurante extends Usuario implements Serializable{
 	 }
 	
 	
+	 
+	 /**
+	  * Metodo que retorna as categorias como texto
+	  * Por ser um metodo getter ele pode ser chamado diretamente so pelo nome na pagina cliente-busca
+	  * @return
+	  */
+	 public String getCategoriasAsText() {
+		 
+		 // LinkedHashSet -> Coleção que mantem a ordem de inserção e não permite elementos duplicados
+		 Set<String> strings = new LinkedHashSet<String>();
+		 
+		 for(CategoriaRestaurante categoria : categorias) {
+			 strings.add(categoria.getNome());
+		 }
+		 return StringUtils.concatenate(strings);
+	 }
 	
 	
-	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }

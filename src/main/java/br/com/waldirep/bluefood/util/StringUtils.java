@@ -1,5 +1,7 @@
 package br.com.waldirep.bluefood.util;
 
+import java.util.Collection;
+
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -34,5 +36,66 @@ public class StringUtils {
 		return encoder.encode(rawString);
 	
 		}
+	
+	
+	/**
+	 * Método que recebe qq tipo de coleção de strings que concatena e separa por virgulas.
+	 * A virgula é concatenada antes do proximo, assim evita que o ultimo elemento contenha virgula.
+	 * @param strings
+	 * @return
+	 */
+	public static String concatenate(Collection<String> strings) {
+		
+		if(strings == null || strings.size() == 0) {
+			return null;
+		}
+		
+		// Objeto que concatena strings, evita ficar recriando strings na memoria
+		StringBuilder sb = new StringBuilder();
+		String delimiter = ", ";
+		boolean first = true; 
+		
+		for (String string : strings) {
+			if(!first) { // Se não for o primeiro elemento concatena uma virgula
+				sb.append(delimiter);
+			}
+			sb.append(string);
+			first = false;
+		}
+		return sb.toString();
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

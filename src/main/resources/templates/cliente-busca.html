@@ -49,11 +49,14 @@
                 <br> <br>
                 <span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span>
                 <br>
-                <span>Categoria de Comida</span>
+                <!-- th:text="${restaurante.categoriasAsText}" -> chamando o metodo da classe Restaurante -->
+                <span th:text="${restaurante.categoriasAsText}"></span>
                 <br>
                 <span th:text="'Tempo médio de entrega : ' + ${restaurante.tempoEntregaBase} + 'm'"></span>
                 <br>
-                <span>Taxa de entrega: R$15,00</span>
+                
+                <!-- ${#numbers.formatCurrency(restaurante.taxaEntrega)} -> Formata o valor para BR -->
+                <span th:text="'Taxa de entrega:  : ' + ${#numbers.formatCurrency(restaurante.taxaEntrega)}"></span>
                 <br>
             </a>
         </div>
