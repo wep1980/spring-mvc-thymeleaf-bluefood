@@ -77,7 +77,10 @@
 
     <div>
         <div id="divRestauranteOpcao" th:each="restaurante : ${restaurantes}">
-            <a href="#">
+            
+            <!-- ?restauranteId= -> o id do restaurante e passado na URL da requisição e capturando pelo RequestParam no Controller -->
+            <a th:href="@{/cliente/restaurante} + '?restauranteId=' + ${restaurante.id} ">
+            
                 <img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteOpcao"/>
                 <br> <br>
                 <span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span>
@@ -85,7 +88,7 @@
                 <!-- th:text="${restaurante.categoriasAsText}" -> chamando o metodo da classe Restaurante -->
                 <span th:text="${restaurante.categoriasAsText}"></span>
                 <br>
-                <span th:text="'Tempo médio de entrega : ' + ${restaurante.tempoEntregaBase} + 'm'"></span>
+                <span th:text="'Tempo médio de entrega : ' + ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span>
                 <br>
                 
                 <!-- ${#numbers.formatCurrency(restaurante.taxaEntrega)} -> Formata o valor para BR -->

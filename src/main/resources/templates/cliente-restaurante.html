@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/cliente/home}"> <!--Pega a pagina de layout e monta com a de login -- th:with="link=@{/cliente/home}" -> passa variaveis para o layout e o valor dela -->
+	
+	<body>
+	   <!-- Adiciona esse conteudo na pagina de layout -->
+	   <div layout:fragment="content"> 
+
+    <div>
+        <img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" style="width: 200px;"/>
+        <br><br>
+        <span id="" th:text="${restaurante.nome}"></span> <br>
+        <span id="" th:text="${restaurante.categoriasAsText}"></span> <br>
+        <span id="" th:text="'Tempo médio de entrega: ' + ${restaurante.calcularTempoEntrega(cep)} + 'm' "></span> <br>
+        <span id="" th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurante.taxaEntrega)}"></span> <br>
+    </div>
+    <br>
+
+    <div>
+        <h1>Opções</h1>
+        <fieldset id="fildsetPadrao">
+            <legend>Filtros</legend>
+            <input type="button" value="Promoções">
+            <input type="button" value="Saladas">
+            <input type="button" value="Bebidas">
+            <input type="button" value="Pizzas">
+        </fieldset>
+        <br>
+    </div>
+
+    <div>
+        <h1>Destaques</h1>
+    </div>
+
+    <div>
+
+        <div>
+            <img src="images/ff_comidaPizza.jpg" style="width: 500px;"/>
+            <br>
+            <span>Pizza de Calabresa</span>
+            <br>
+            <span>Massa fina, queijo, calabresa e pimenta.</span>
+            <br>
+            <span>R$ 45,00</span>
+            <br>
+            <form action="" method="POST">
+                <label for="quantidade">Quantidade: </label>
+                <br>
+                <select name="quantidade" id="quantidade">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+                <br><br>
+                Observações:
+                <br>
+                <textarea name="" id="" cols="30" rows="5">
+
+                </textarea>
+                <br><br>
+                <input type="button" value="Adicionar ao carrinho">
+                <br>
+            </form>
+        </div>
+
+        <br>
+        <div>
+            <img src="images/ff_comidaHamburguer.jpg" style="width: 500px;"/>
+            <br>
+            <span>Hamburguer</span>
+            <br>
+            <span>Pão, hamburguer 200gr, queijo, tomate, alface e bacon.</span>
+            <br>
+            <span>R$ 30,00</span>
+            <br>
+            <form action="" method="POST">
+                <label for="quantidade">Quantidade: </label>
+                <br>
+                <select name="quantidade" id="quantidade">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                </select>
+                <br><br>
+                Observações:
+                <br>
+                <textarea name="" id="" cols="30" rows="5">
+
+                </textarea>
+                <br><br>
+                <input type="button" value="Adicionar ao carrinho">
+                <br>
+            </form>
+        </div>
+
+    </div>
+
+    <input type="button" value="Voltar">
+
+  </div>
+
+</body>
+
+</html>

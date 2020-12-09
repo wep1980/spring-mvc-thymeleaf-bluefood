@@ -23,6 +23,7 @@ import br.com.waldirep.bluefood.domain.cliente.ClienteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestaurante;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
+import br.com.waldirep.bluefood.domain.restaurante.RestauranteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.SearchFilter;
 import br.com.waldirep.bluefood.util.SecurityUtils;
 
@@ -47,6 +48,9 @@ public class ClienteController {
 	
 	@Autowired
 	private RestauranteService restauranteService;
+	
+	@Autowired
+	private RestauranteRepository restauranteRepository;
 	
 
 	/**
@@ -123,12 +127,25 @@ public class ClienteController {
 		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model); // Listando as categorias
 		
 		model.addAttribute("searchFilter", filter); // recolocando dentro do model para que a proxima tela possa acessar
+		model.addAttribute("cep", SecurityUtils.loggedCliente().getCep()); // Pegando o cliente logado e atribuindo o valor do cep
 		
 		return "cliente-busca";
 	}
 	
 	
 	
+	@GetMapping(path = "/restaurante")
+	public String viewRestaurante(
+			@RequestParam("restauranteId") Integer restauranteId,
+			Model model) {
+		
+		Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow();
+		model.addAttribute("restaurante", restaurante);
+		
+		model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
+		
+		return "cliente-restaurante";
+	}
 	
 	
 	
