@@ -46,6 +46,7 @@ public class SearchFilter {
 	
 	private boolean asc;
 	
+	// Por padrao e false
 	private boolean entregaGratis;
 	
 	

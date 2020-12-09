@@ -111,6 +111,29 @@ public class Restaurante extends Usuario implements Serializable{
 		 }
 		 return StringUtils.concatenate(strings);
 	 }
+	 
+	 /**
+	  * A Regra de negocio é pegar cada digito do CEP somar todos e colocar no tempo de entrega base
+	  * @param cep
+	  * @return
+	  */
+	 public Integer calcularTempoEntrega(String cep) {
+		 int soma = 0;
+		 
+		 // toCharArray() -> converte uma string em um array de caracteres
+		 for(char c : cep.toCharArray()) {
+			 
+			 // Pegando o valor numerico do caracter
+			 int valor = Character.getNumericValue(c);
+			 if(valor > 0) {
+				 soma += valor;
+			 }
+		 }
+		 
+		 soma /= 2;
+		 
+		 return tempoEntregaBase + soma;
+	 }
 	
 	
 	 

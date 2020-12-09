@@ -1,6 +1,9 @@
 package br.com.waldirep.bluefood.application;
 
+import java.util.Iterator;
 import java.util.List;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 import br.com.waldirep.bluefood.domain.cliente.ClienteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
+import br.com.waldirep.bluefood.domain.restaurante.RestauranteComparator;
 import br.com.waldirep.bluefood.domain.restaurante.RestauranteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.SearchFilter;
 import br.com.waldirep.bluefood.domain.restaurante.SearchFilter.SearchType;
+import br.com.waldirep.bluefood.util.SecurityUtils;
 
 @Service
 public class RestauranteService {
@@ -25,6 +30,8 @@ public class RestauranteService {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	
 	
 	/**
 	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
@@ -88,7 +95,8 @@ public class RestauranteService {
 	
 	
 	/**
-	 * Metodo que retorna a lista de restaurantes
+	 * Metodo que retorna a lista de restaurantes pesquisados
+	 * Pesquisa feita por texto no campo de busca ou pelas categorias
 	 * @param filter
 	 * @return
 	 */
@@ -105,6 +113,21 @@ public class RestauranteService {
 		} else {
 			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " não é suportado");
 		}
+		
+		// Itarenado nos restaurantes que foram encontrados, com o iterator podemos modificar um item da coleção, no caso remover.
+		Iterator<Restaurante> it = restaurantes.iterator();
+		while(it.hasNext()) {
+			Restaurante restaurante = it.next();
+			double taxaEntrega = restaurante.getTaxaEntrega().doubleValue(); // doubleValue() -> convertendo para double
+			
+			// De acordo com a pesquisa retira ou não retira os restaurantes com entrega gratis
+			if(filter.isEntregaGratis() && taxaEntrega > 0 || !filter.isEntregaGratis() && taxaEntrega == 0) {
+				it.remove(); // remove os elementos da lista
+			}
+		}
+		
+		RestauranteComparator comparator = new RestauranteComparator(filter, SecurityUtils.loggedCliente().getCep());
+		restaurantes.sort(comparator); // Ordena a lista de restaurantes atraves do comparator
 		
 		return restaurantes;
 	}
