@@ -6,7 +6,7 @@
 	   <!-- Adiciona esse conteudo na pagina de layout -->
 	   <div layout:fragment="content"> 
 	   
-   <!-- id="form" -> nome do formulario, sera acessado por funções javaScript --> 	   
+   <!-- id="form" -> nome do formulario, sera acessado por funções javaScript -- th:object="${searchFilter}" -> Me permite acessar a Classe e acessar os atributos dele --> 	   
    <form method="get" th:object="${searchFilter}" th:action="@{/cliente/search}" id="form">
    
 	                <!-- id="searchType" -> nome do input, sera acessado por funções javaScript -->             
@@ -43,18 +43,37 @@
 	            </a>
 	        </div>
 	    </div>
-    </form>
+    
 
     <div>
         <h1>Resultados</h1>
         <fieldset id="fildsetPadrao">
             <legend >Filtros</legend>
-            <input type="button" value="Entrega grátis"><br>
-            <input type="button" value="Menor preço" id="inputSelecionado"> <input type="button" value="Maior preço"> <br>
-            <input type="button" value="Menor taxa"> <input type="button" value="Maior taxa"> <br>
-            <input type="button" value="Menor tempo"> <input type="button" value="Maior tempo"> <br>
+            
+            <!-- th:id="*{entregaGratis} ? 'inputSelecionado' : '' " -> Se a entrega gratis for true (atributo do SearchFilter) o id="" recebe o valor de 'inputSelecionado' senão recebe um id vazio -- onclick="setCmd('EntregaGratis')" -> funcão javaScript que seta o cmd -->
+            <input type="button" value="Entrega grátis" th:id="*{entregaGratis} ? 'inputSelecionado' : '' " onclick="setCmd('EntregaGratis')"> <br>
+            
+            <!-- Se o atributo do SearchFilter for taxa e a ordem for decrescente 'inputSelecionado' senão vazio '' --- name() -> METODO QUE EXISTE DENTRO DO ENUM QUE RETORNA O NOME DELE e compara com a string 'Taxa' -->
+            <input type="button" value="Maior taxa" th:id="*{order.name()} == 'Taxa' and !*{asc} ? 'inputSelecionado' : '' " onclick="setCmd('MaiorTaxa')"> 
+            
+             <!-- Se o atributo do SearchFilter for taxa e a ordem for crescente 'inputSelecionado' senão vazio '' --- name() -> METODO QUE EXISTE DENTRO DO ENUM QUE RETORNA O NOME DELE e compara com a string 'Taxa' -->
+            <input type="button" value="Menor taxa" th:id="*{order.name()} == 'Taxa' and *{asc} ? 'inputSelecionado' : '' " onclick="setCmd('MenorTaxa')"> <br>
+            
+            <input type="button" value="Maior tempo" th:id="*{order.name()} == 'Tempo' and !*{asc} ? 'inputSelecionado' : '' " onclick="setCmd('MaiorTempo')"> 
+            
+            <input type="button" value="Menor tempo" th:id="*{order.name()} == 'Tempo' and *{asc} ? 'inputSelecionado' : '' "  onclick="setCmd('MenorTempo')"> <br>
+            
+            <!-- Mapeamento -->
+            <input type="hidden" id="entregaGratis" th:field="*{entregaGratis}">
+            <input type="hidden" id="order" th:field="*{order}">
+            <input type="hidden" id="asc" th:field="*{asc}">
+            
+            <!-- Não e feito o binding do cmd, ele não vai dentro do objeto, ele vai externamente e é recuperado atraves da request -->
+            <input type="hidden" id="cmd" name="cmd">
         </fieldset>
     </div>
+    
+    </form>
 
     <div>
         <div id="divRestauranteOpcao" th:each="restaurante : ${restaurantes}">

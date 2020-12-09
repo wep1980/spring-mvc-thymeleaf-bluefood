@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.waldirep.bluefood.application.ClienteService;
 import br.com.waldirep.bluefood.application.RestauranteService;
@@ -99,12 +100,23 @@ public class ClienteController {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param filter
+	 * @param command
+	 * @param model
+	 * @return
+	 */
 	@GetMapping(path = "/search")
 	public String search (@ModelAttribute("searchFilter") SearchFilter filter,
+			              @RequestParam(value = "cmd", required = false) String command,
 			              Model model) {
-		
-		filter.processFilter(); // Processa o tipo de busca, por categoria ou texto
+		/**
+		 * Não e feito o binding do cmd, ele não vai dentro do objeto, ele vai externamente e é recuperado atraves da request.
+		 * Vai ter um valor na request do formulario que sera o cmd correspondente ao botão clicado, esse valor(cmd) sera extraido da requisição e sera passado como parametro na variavel command.
+		 *  required = false -> Em alguns casos o cmd não obrigatorio, exemplo: na home do cliente fazendo pesquisa, nesse caso vira null e no processFilter ja é tratado . E necessario colocar o required como false para evitar erros, ja que spring entende por padrão como obrigatorio. 
+		 */
+		filter.processFilter(command); // Processa o tipo de busca, por categoria ou texto e captura no command(cmd) selecionado na tela.
 		
 		List<Restaurante> restaurantes = restauranteService.search(filter); // Listando os restaurantes
 		model.addAttribute("restaurantes", restaurantes);

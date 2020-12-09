@@ -28,3 +28,13 @@ function searchRes(categoriaId){
 	
 	document.getElementById("form").submit();
 }
+
+
+/**
+Função que coloca o valor do cmd dentro do campo <input type="hidden" id="cmd" name="cmd"> e submeti o formulario
+ */
+function setCmd(cmd){
+	
+	document.getElementById("cmd").value = cmd;
+	document.getElementById("form").submit();
+}
