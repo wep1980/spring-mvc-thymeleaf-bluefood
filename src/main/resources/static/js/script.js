@@ -38,3 +38,12 @@ function setCmd(cmd){
 	document.getElementById("cmd").value = cmd;
 	document.getElementById("form").submit();
 }
+
+
+/**
+Função que pega o id="categoria" e atribui ao value o valor da categoria passado como parametro
+ */
+function filterCardapio(categoria){
+	document.getElementById("categoria").value = categoria;
+	document.getElementById("filterForm").submit();
+}

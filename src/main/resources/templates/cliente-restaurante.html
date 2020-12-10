@@ -18,12 +18,25 @@
 
 	    <div>
 	        <h1>Opções</h1>
-	        <fieldset id="fildsetPadrao">
-	            <legend>Filtros</legend>
-	            <div style="display: inline;" th:each="categoria : ${categorias}">
-	            <input type="button" th:value="${categoria}">
-	            </div>
-	        </fieldset>
+	        <form id="filterForm" action="get" th:action="@{/cliente/restaurante}">
+	        
+	          <input type="hidden" id="categoria" name="categoria"/>
+	           <input type="hidden" name="restauranteId" th:value="${restaurante.id}"/>
+	          
+		        <fieldset id="fildsetPadrao">
+		            <legend>Filtros</legend>
+		            <div style="display: inline;" th:each="categoria : ${categorias}">
+		            
+		              <!-- th:data-categoria="${categoria}" -> HTML 5 passa atributos extras dentro de uma TAG que pode ser recuperado e passado como parametro( No caso via javaScript ) this.getAttribute('data-categoria') -->
+		              <input 
+		                   th:id="${categoria == categoriaSelecionada} ? 'inputSelecionado' : '' "
+			               type="button" 
+			               th:value="${categoria}"
+			               th:data-categoria="${categoria}" 
+			               onclick="filterCardapio(this.getAttribute('data-categoria'));">
+		            </div>
+		        </fieldset>
+	        </form>
 	        <br>
 	    </div>
 
@@ -67,7 +80,10 @@
 		            </form>
 	        </div>
 	     </div>
-     
+       
+       <!-- Essa mensagem so aparece na tela se não existir itens em destaque -->
+       <span th:if="${itensCardapioDestaque.size() == 0}">Não existem itens em destaque</span>
+       
      <br>
         
         <div>
