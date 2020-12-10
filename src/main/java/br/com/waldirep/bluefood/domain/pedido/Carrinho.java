@@ -1,15 +1,21 @@
 package br.com.waldirep.bluefood.domain.pedido;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import br.com.waldirep.bluefood.domain.restaurante.ItemCardapio;
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
+import lombok.Getter;
 
-public class Carrinho {
+
+@Getter
+public class Carrinho implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
-	
+
 	private List<ItemPedido> itens = new ArrayList<ItemPedido>();
 	
 	private Restaurante restaurante;
@@ -111,7 +117,24 @@ public class Carrinho {
 	
 	
 	
-	
+	/**
+	 * Metodo que calcula o valor total do carrinho
+	 * @return
+	 */
+	public BigDecimal getPrecoTotal(boolean adicionarTaxaEntrega) {
+		
+		BigDecimal soma = BigDecimal.ZERO;
+		
+		for (ItemPedido item : itens) {
+			soma = soma.add(item.getPrecoCalculado());
+		}
+		
+		if(adicionarTaxaEntrega) { // Adiciona taxa de entrega
+			soma = soma.add(restaurante.getTaxaEntrega());
+		}
+		
+		return soma;
+	}
 	
 	
 	

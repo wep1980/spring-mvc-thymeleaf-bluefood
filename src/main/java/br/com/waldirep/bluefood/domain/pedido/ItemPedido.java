@@ -23,5 +23,16 @@ public class ItemPedido {
 	private String observacoes;
 	
 	private BigDecimal preco;
+	
+	
+	
+	/**
+	 * Calcula o valor total dos itens de pedido
+	 * REGRA : preco * quantidade
+	 * @return
+	 */
+	public BigDecimal getPrecoCalculado() {
+		return preco.multiply(BigDecimal.valueOf(quantidade));
+	}
 
 }
