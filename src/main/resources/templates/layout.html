@@ -28,6 +28,10 @@
          
                 <!-- #authentication.principal -> Representa o objeto da autenticação do usuario -- .principal -> Dentro do #authentication existe um getPrincipal(LoggedUser) -- PEGA O NOME DO USUARIO QUE ESTA LOGADO -->
 				<span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
+				
+				<div th:if="${session.carrinho != null}" style="display: inline;">
+				  <br/><a th:href="@{/cliente/carrinho/visualizar}"><img th:src="@{/images/bf_iconeCarrinho.png}" id="imgIconeCarrinho"></a>
+				</div>
         </div>
         
     </header>

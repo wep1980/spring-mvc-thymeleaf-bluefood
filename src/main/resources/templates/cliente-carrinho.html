@@ -5,6 +5,11 @@
 	<body>
 	   <!-- Adiciona esse conteudo na pagina de layout -->
 	   <div layout:fragment="content"> 
+	   
+	          <div id="mesagemDeErro" th:if="${msg != null}">
+			     <span th:text="${msg}"></span>
+			  </div>
+			  <br/>
 
 		    <div>
 		        <h1>SEU PEDIDO</h1>
@@ -19,38 +24,42 @@
 		        <span th:text="'Qtd: ' + ${item.quantidade}"></span><br/>
 		        <span th:text="${item.observacoes}">(exemplo de observação, quando houver)</span><br/>
 		        <span th:text="${#numbers.formatCurrency(item.preco)}">R$ 45,00</span><br /><br />
-		        <input type="button" value="Remover">
+		        <input type="button" value="Remover" th:onclick="'location.href=\'' + @{/cliente/carrinho/remover} + '?itemId=' + ${item.itemCardapio.id} + '\';'"> <br/> <br/>
 		    </div>
 		
 		    <br /><br />
-		
-		    <div>
-		        <span>Taxa de entrega</span><br/>
-		        <span th:text="${#numbers.formatCurrency(carrinho.restaurante.taxaEntrega)}"></span>
-		    </div>
-		    <br /><br />
-		
-		    <div>
-		        <span>Total</span>
-		        <span th:text="${#numbers.formatCurrency(carrinho.getPrecoTotal(true))}"></span>
-		    </div>
-		    <br /><br />
-		
-		    <div>
-		        <!--onkeypress="return isNumberKey(event)" Quando a tecla do teclado e pressionada dispara esse evento
-		            Validação para aceitar somente números no campo-->
-		        <span>Cartão de Crédito</span><br/>
-		        <input type="text" name="cartao" onkeypress="return isNumberKey(event)"/>
-		    </div>
 		    
-		    <br/>
-		    
-		    <div>
-		        <input type="button" value="Enviar pedido"/>
-		        <br/> <br/>
-		        <input type="button" value="Voltar"/>
-		    </div>
-
+		<div th:if="${carrinho.vazio()}">
+		   <span>O carrinho não possui itens</span>
+		   <br/>
+		</div>
+		
+			<div th:if="!${carrinho.vazio()}">
+				    <div>
+				        <span>Taxa de entrega</span><br/>
+				        <span th:text="${#numbers.formatCurrency(carrinho.restaurante.taxaEntrega)}"></span>
+				    </div>
+				    <br /><br />
+				
+				    <div>
+				        <span>Total</span>
+				        <span th:text="${#numbers.formatCurrency(carrinho.getPrecoTotal(true))}"></span>
+				    </div>
+				    <br /><br />
+				
+				    <div>
+				        <!--onkeypress="return isNumberKey(event)" Quando a tecla do teclado e pressionada dispara esse evento
+				            Validação para aceitar somente números no campo-->
+				        <span>Cartão de Crédito</span><br/>
+				        <input type="text" name="cartao" onkeypress="return isNumberKey(event)"/>
+				    </div>
+				    
+				    <br/>
+			    
+				    <div>
+				        <input type="button" value="Enviar pedido"/>
+				    </div>
+	          </div>
        </div>
   
     </body>

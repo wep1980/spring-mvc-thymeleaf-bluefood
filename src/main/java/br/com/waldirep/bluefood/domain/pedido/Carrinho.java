@@ -138,9 +138,22 @@ public class Carrinho implements Serializable{
 	
 	
 	
+	/**
+	 * Limpa o carrinho
+	 */
+	public void limpar() {
+		itens.clear();
+		restaurante = null;
+	}
 	
 	
-	
+	/**
+	 * Metodo (Atalho) que indentifica se o carrinho esta vazio ou não 
+	 * @return
+	 */
+	public boolean vazio() {
+		return itens.size() == 0;
+	}
 	
 	
 	
