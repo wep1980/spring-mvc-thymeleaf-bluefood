@@ -47,18 +47,23 @@
 				    </div>
 				    <br /><br />
 				
-				    <div>
-				        <!--onkeypress="return isNumberKey(event)" Quando a tecla do teclado e pressionada dispara esse evento
-				            Validação para aceitar somente números no campo-->
-				        <span>Cartão de Crédito</span><br/>
-				        <input type="text" name="cartao" onkeypress="return isNumberKey(event)"/>
-				    </div>
+				<form th:action="@{/cliente/pagamento/pagar}" method="post">
+					    <div>
+					        <!--onkeypress="return isNumberKey(event)" Quando a tecla do teclado e pressionada dispara esse evento
+					            Validação para aceitar somente números no campo-->
+					        <span>Cartão de Crédito</span><br/>
+					        
+					        <!-- name="numCartao" -> Essa informação pode ser recebida como param no request(@RequestParam("numCartao")) no PagamentoController-->
+					        <input type="text" name="numCartao" onkeypress="return isNumberKey(event)"/>
+					    </div>
+					    
+					      <br/>
 				    
-				    <br/>
-			    
-				    <div>
-				        <input type="button" value="Enviar pedido"/>
-				    </div>
+					    <div>
+					        <input type="submit" value="Enviar pedido"/>
+					    </div>
+			   </form>
+			   
 	          </div>
        </div>
   

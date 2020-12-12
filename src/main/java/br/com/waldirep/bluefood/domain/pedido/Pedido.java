@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -74,6 +75,10 @@ public class Pedido implements Serializable{
 	
 	@NotNull 
 	private BigDecimal subtotal; // Valor do pedido sem a taxa de entrega
+	
+	@NotNull 
+	@Column(name = "taxa_entrega")
+	private BigDecimal taxaEntrega;
 	
 	@NotNull 
 	private BigDecimal total;
