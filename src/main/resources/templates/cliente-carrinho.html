@@ -20,30 +20,30 @@
 		    <br /><br />
 		
 		    <div th:each="item : ${carrinho.itens}">
-		        <span th:text="${item.itemCardapio.nome}"></span><br/>
-		        <span th:text="'Qtd: ' + ${item.quantidade}"></span><br/>
-		        <span th:text="${item.observacoes}">(exemplo de observação, quando houver)</span><br/>
-		        <span th:text="${#numbers.formatCurrency(item.preco)}">R$ 45,00</span><br /><br />
+		        <span id="carrinhoOpcaoTitulo" th:text="${item.itemCardapio.nome}"></span> <br/>
+		        <span id="carrinhoOpcaoTaxa" th:text="'Qtd: ' + ${item.quantidade}"></span> <br/>
+		        <span id="carrinhoOpcaoTaxa" th:text="${item.observacoes}"></span><br/>
+		        <span id="carrinhoOpcaoTaxa" th:text="${#numbers.formatCurrency(item.preco)}"></span> <br/><br/>
 		        <input type="button" value="Remover" th:onclick="'location.href=\'' + @{/cliente/carrinho/remover} + '?itemId=' + ${item.itemCardapio.id} + '\';'"> <br/> <br/>
 		    </div>
 		
 		    <br /><br />
 		    
 		<div th:if="${carrinho.vazio()}">
-		   <span>O carrinho não possui itens</span>
+		   <span id="carrinhoOpcaoTitulo">O carrinho não possui itens</span>
 		   <br/>
 		</div>
 		
 			<div th:if="!${carrinho.vazio()}">
 				    <div>
-				        <span>Taxa de entrega</span><br/>
-				        <span th:text="${#numbers.formatCurrency(carrinho.restaurante.taxaEntrega)}"></span>
+				        <span id="carrinhoOpcaoTitulo">Taxa de entrega</span><br/>
+				        <span id="carrinhoOpcaoTaxa" th:text="${#numbers.formatCurrency(carrinho.restaurante.taxaEntrega)}"></span>
 				    </div>
 				    <br /><br />
 				
 				    <div>
-				        <span>Total</span>
-				        <span th:text="${#numbers.formatCurrency(carrinho.getPrecoTotal(true))}"></span>
+				        <span id="carrinhoOpcaoTitulo">Total</span> <br/>
+				        <span id="carrinhoOpcaoTaxa" th:text="${#numbers.formatCurrency(carrinho.getPrecoTotal(true))}"></span>
 				    </div>
 				    <br /><br />
 				
@@ -51,7 +51,7 @@
 					    <div>
 					        <!--onkeypress="return isNumberKey(event)" Quando a tecla do teclado e pressionada dispara esse evento
 					            Validação para aceitar somente números no campo-->
-					        <span>Cartão de Crédito</span><br/>
+					        <span id="cartaoOpcaoTitulo">Cartão de Crédito</span> <br/>
 					        
 					        <!-- name="numCartao" -> Essa informação pode ser recebida como param no request(@RequestParam("numCartao")) no PagamentoController-->
 					        <input type="text" name="numCartao" onkeypress="return isNumberKey(event)"/>
