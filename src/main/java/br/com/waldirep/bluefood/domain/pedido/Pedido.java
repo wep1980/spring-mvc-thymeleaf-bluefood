@@ -102,4 +102,39 @@ public class Pedido implements Serializable{
 	private Set<ItemPedido> itens;
 	
 
+	
+	/**
+	 * Metrodo que retorna o Id formatado para a tela de cliente-home no campo ultimos pedidos
+	 * @return
+	 */
+	public String getFormattedId() {
+		return String.format("#%04d", id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

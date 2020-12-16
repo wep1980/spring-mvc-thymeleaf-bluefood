@@ -45,12 +45,12 @@
 	    </div>
     </form>
 
-    <div style="padding-bottom: 15px;">
-        <h1>Últimos pedidos</h1>
-        <br/>
-        <input type="button" value="#15456 McBlunalds"><br/>
-        <input type="button" value="#89856 Free Food"><br/>
-        <input type="button" value="#72132 Hard blue"><br/>
+    <div style="padding-bottom: 15px; font-weight: bold; font-size: 13px;">
+        <h1>Últimos pedidos</h1> <br/>
+	        <div th:each="pedido : ${pedidos}">
+	          <input type="button" th:value="${pedido.formattedId} + ' ' + ${pedido.restaurante.nome}" th:onclick="'location.href=\'' + @{/cliente/pedido/view} + '?pedidoId=' + ${pedido.id} + '\';'"> <br/>
+	        </div>
+	        <span th:if="${pedidos.size() == 0}">Não existe nenhum pedido anterior</span>
     </div>
 
     <div style="padding-bottom: 100px;">

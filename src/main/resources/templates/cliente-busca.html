@@ -101,7 +101,7 @@
     
     <!-- Esse div so aparece se na busca por restaurantes não tiver nenhum resultado -->
     <div th:if="${restaurantes.size() == 0}">
-      <span>Nenhum restaurante encontrado</span> <br/> <br/>
+      <span style="font-weight: bold; font-size: 13px;">Nenhum restaurante encontrado</span> <br/> <br/>
     </div>
 
     <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">

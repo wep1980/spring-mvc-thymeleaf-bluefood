@@ -20,6 +20,8 @@ import br.com.waldirep.bluefood.application.RestauranteService;
 import br.com.waldirep.bluefood.application.ValidationException;
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 import br.com.waldirep.bluefood.domain.cliente.ClienteRepository;
+import br.com.waldirep.bluefood.domain.pedido.Pedido;
+import br.com.waldirep.bluefood.domain.pedido.PedidoRepository;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestaurante;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.ItemCardapio;
@@ -57,6 +59,9 @@ public class ClienteController {
 	@Autowired
 	private ItemCardapioRepository itemCardapioRepository;
 	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
 
 	/**
 	 * Encontra todas as categorias
@@ -69,6 +74,10 @@ public class ClienteController {
 		List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome")); // Busca todas as categorias ordenadas por nome
 		model.addAttribute("categorias", categorias);
 		model.addAttribute("searchFilter", new SearchFilter()); // Disponibiliza o searchFilter na tela home, o atributo texto sera colocado dentro do searchFilter
+		
+		List<Pedido> pedidos = pedidoRepository.listPedidosByCliente(SecurityUtils.loggedCliente().getId()); // Pegando os pedidos do usuario logado
+		model.addAttribute("pedidos", pedidos);
+		
 		return "cliente-home";
 	}
 	
