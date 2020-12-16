@@ -178,7 +178,7 @@ img#imgIconeUsuario
 width: 100px;
 }
 
-div#mesagemDeErro
+div#mensagemDeErro
 {
     background-color: #d40000;
     width: 400px;
@@ -254,6 +254,14 @@ span#restauranteOpcaoTitulo
     text-transform: uppercase;
 }
 
+span#restauranteOpcaoTaxa
+{
+    font-weight: bold;
+    font-size: 14px;
+    color:#0000CD;
+    text-transform: uppercase;
+}
+
 div#divRestauranteOpcao
 {
     width: 400px;
@@ -265,7 +273,7 @@ div#divRestauranteOpcao
 
 img#imgRestaurantePedido
 {
-width: 200px;
+width: 130px;
 padding-top: 15px;
 }
 
