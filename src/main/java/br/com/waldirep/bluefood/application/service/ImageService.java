@@ -43,6 +43,15 @@ public class ImageService {
 			throw new ApplicationServiceException(e);
 		}
 	}
+	
+	
+	public void uploadComida(MultipartFile multipartFile, String fileName) {
+		try {
+			IOUtils.copy(multipartFile.getInputStream(), fileName, comidasDir);
+		} catch (IOException e) {
+			throw new ApplicationServiceException(e);
+		}
+	}
 
 	
 	

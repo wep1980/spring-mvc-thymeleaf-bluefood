@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
 import br.com.waldirep.bluefood.domain.cliente.ClienteRepository;
+import br.com.waldirep.bluefood.domain.restaurante.ItemCardapio;
+import br.com.waldirep.bluefood.domain.restaurante.ItemCardapioRepository;
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
 import br.com.waldirep.bluefood.domain.restaurante.RestauranteComparator;
 import br.com.waldirep.bluefood.domain.restaurante.RestauranteRepository;
@@ -31,7 +33,8 @@ public class RestauranteService {
 	@Autowired
 	private ImageService imageService;
 	
-	
+	@Autowired
+	private ItemCardapioRepository itemCardapioRepository;
 	
 	/**
 	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
@@ -136,8 +139,14 @@ public class RestauranteService {
 	
 	
 	
-	
-	
+	@Transactional
+	public void saveItemCardapio(ItemCardapio itemCardapio) {
+		
+		itemCardapio = itemCardapioRepository.save(itemCardapio);
+		
+		itemCardapio.setImagemFileName();
+		imageService.uploadComida(itemCardapio.getImagemFile(), itemCardapio.getImagem());
+	}
 	
 	
 	

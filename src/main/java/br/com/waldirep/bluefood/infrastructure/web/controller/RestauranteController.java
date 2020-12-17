@@ -1,5 +1,7 @@
 package br.com.waldirep.bluefood.infrastructure.web.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.waldirep.bluefood.application.service.RestauranteService;
 import br.com.waldirep.bluefood.application.service.ValidationException;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
+import br.com.waldirep.bluefood.domain.restaurante.ItemCardapio;
+import br.com.waldirep.bluefood.domain.restaurante.ItemCardapioRepository;
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
 import br.com.waldirep.bluefood.domain.restaurante.RestauranteRepository;
 import br.com.waldirep.bluefood.util.SecurityUtils;
@@ -32,6 +37,9 @@ public class RestauranteController {
 	
 	@Autowired
 	private RestauranteService restauranteService;
+	
+	@Autowired
+	private ItemCardapioRepository itemCardapioRepository;
 	
 	
 	
@@ -63,7 +71,7 @@ public class RestauranteController {
 			Errors errors,
 			Model model) {
 		
-		if (!errors.hasErrors()) { // Se não tiver erros salva o cliente
+		if (!errors.hasErrors()) { // Se não tiver erros salva o restaurante
 			try {
 				restauranteService.saveRestaurante(restaurante);
 				model.addAttribute("msg", "Restaurante gravado com sucesso!"); // Envia a mensagem de sucesso através de
@@ -78,6 +86,79 @@ public class RestauranteController {
 		return "restaurante-cadastro";
 
 	}
+	
+	
+	@GetMapping(path = "/comidas")
+	public String viewComidas(Model model) {
+		
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId(); // pegando o Id do restaurante logado
+		Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow(); // .orElseThrow() -> Lança a excessão caso o cliente não exista
+		model.addAttribute("restaurante", restaurante);
+		
+		List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restauranteId);
+		
+		model.addAttribute("itensCardapio", itensCardapio);
+		
+		model.addAttribute("itemCardapio", new ItemCardapio());
+		
+		return "restaurante-comidas";
+	}
+	
+	
+	
+	
+	@GetMapping(path = "/comidas/remover")
+	public String remover(@RequestParam("itemId") Integer itemId, Model model) {
+		
+		itemCardapioRepository.deleteById(itemId);
+		
+		// No redirect e um endereço passado para o navegador, não pode ser acessado um template interno, precisa ser uma URL para ser feito uma nova requisição e receber a resposta
+		return "redirect:/restaurante/comidas";
+	}
+	
+	
+	
+	/**
+	 * Errors erros -> como existe validações pode ser que ocorra erros - Faz a verificação de erros
+	 * @param itemCardapio
+	 * @param erros
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(path = "/comidas/cadastrar")
+	public String cadastrar(@Valid @ModelAttribute("itemCardapio") ItemCardapio itemCardapio,
+			Errors erros,
+			Model model) {
+		
+		if(erros.hasErrors()) {
+			Integer restauranteId = SecurityUtils.loggedRestaurante().getId(); // pegando o Id do restaurante logado
+			Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow(); // .orElseThrow() -> Lança a excessão caso o cliente não exista
+			model.addAttribute("restaurante", restaurante);
+			
+			List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restauranteId);
+			
+			model.addAttribute("itensCardapio", itensCardapio);
+			
+			return "restaurante-comidas";
+		}
+		
+		restauranteService.saveItemCardapio(itemCardapio);
+		return "redirect:/restaurante/comidas";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
