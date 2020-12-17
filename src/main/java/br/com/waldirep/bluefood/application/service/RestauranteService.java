@@ -47,7 +47,9 @@ public class RestauranteService {
 		
 		if(restaurante.getId() != null) { // Se for edição
 			Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow(); // Pegando a senha do restaurante no BD
-			restaurante.setSenha(restauranteDB.getSenha()); // Colocando a senha novamente no restaurante
+			restaurante.setSenha(restauranteDB.getSenha()); // Colocando a senha novamente no restaurante, pois ela não sofre alteração
+			restaurante.setLogotipo(restauranteDB.getLogotipo()); // Colocando a logo novamente no restaurante, pois ela não sofre alteração
+			restauranteRepository.save(restaurante);
 			
 		}else { // Se for um restaurante novo
 			restaurante.encryptPassword(); // criptografa a senha
