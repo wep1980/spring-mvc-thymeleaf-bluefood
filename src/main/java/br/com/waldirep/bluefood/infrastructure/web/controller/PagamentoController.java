@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import br.com.waldirep.bluefood.application.PagamentoException;
 import br.com.waldirep.bluefood.application.PedidoService;
 import br.com.waldirep.bluefood.domain.pedido.Carrinho;
 import br.com.waldirep.bluefood.domain.pedido.Pedido;
@@ -36,14 +37,20 @@ public class PagamentoController {
 			SessionStatus sessionStatus,
 			Model model) {
 		
-		Pedido pedido = pedidoService.criarEPagar(carrinho, numCartao); // Depois de ser gerado o pedido do carrinho, o carrinho precisa ficar vazio
-		sessionStatus.setComplete();
-		
-		/*
-		 * Direciona o usuario para a tela de pedido
-		 * Ao inves de ser feito forward sera feito um redirect -> o navegador redireciona
-		 */
-		return "redirect:/cliente/pedido/view?pedidoId=" + pedido.getId();
+		try {
+			Pedido pedido = pedidoService.criarEPagar(carrinho, numCartao); // Depois de ser gerado o pedido do carrinho, o carrinho precisa ficar vazio
+			sessionStatus.setComplete();
+			
+			/*
+			 * Direciona o usuario para a tela de pedido
+			 * Ao inves de ser feito forward sera feito um redirect -> o navegador redireciona
+			 */
+			return "redirect:/cliente/pedido/view?pedidoId=" + pedido.getId();
+			
+		} catch (PagamentoException e) {
+			model.addAttribute("msg", e.getMessage());
+			return "cliente-carrinho";
+		}
 	}
 
 }
