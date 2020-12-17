@@ -1,4 +1,4 @@
-package br.com.waldirep.bluefood.application;
+package br.com.waldirep.bluefood.application.service;
 
 import java.util.Iterator;
 import java.util.List;

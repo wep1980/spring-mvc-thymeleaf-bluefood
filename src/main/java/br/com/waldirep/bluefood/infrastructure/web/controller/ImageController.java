@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.waldirep.bluefood.application.ImageService;
+import br.com.waldirep.bluefood.application.service.ImageService;
 
 /**
  * Controller que vai realizar todas as operações com imagens

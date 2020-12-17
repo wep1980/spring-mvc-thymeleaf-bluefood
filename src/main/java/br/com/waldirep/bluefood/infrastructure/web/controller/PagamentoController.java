@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import br.com.waldirep.bluefood.application.PagamentoException;
-import br.com.waldirep.bluefood.application.PedidoService;
+import br.com.waldirep.bluefood.application.service.PagamentoException;
+import br.com.waldirep.bluefood.application.service.PedidoService;
 import br.com.waldirep.bluefood.domain.pedido.Carrinho;
 import br.com.waldirep.bluefood.domain.pedido.Pedido;
 

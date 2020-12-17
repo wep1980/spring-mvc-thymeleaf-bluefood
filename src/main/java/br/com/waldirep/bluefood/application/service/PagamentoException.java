@@ -1,4 +1,4 @@
-package br.com.waldirep.bluefood.application;
+package br.com.waldirep.bluefood.application.service;
 
 @SuppressWarnings("serial")
 public class PagamentoException extends Exception {

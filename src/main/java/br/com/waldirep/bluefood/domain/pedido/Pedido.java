@@ -13,10 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
+import br.com.waldirep.bluefood.domain.pagamento.Pagamento;
 import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -101,7 +103,12 @@ public class Pedido implements Serializable{
 	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER) // RELACIONAMENTO ENTRE CHAVES JPA -> A configuracão com itemPedido e pelo id da classe ItemPedido junto com o pedido da classe ItemPedidoPK = id.pedido
 	private Set<ItemPedido> itens;
 	
-
+	/*
+	 * Como na classe Pagamento foi eleita a dona da relação, aqui e necessario colocar o mappedBy referenciando o atributo(pedido) da dona do relacionamento, classe Pagamento
+	 */
+	@OneToOne(mappedBy = "pedido")
+    private Pagamento pagamento;
+	
 	
 	/**
 	 * Metrodo que retorna o Id formatado para a tela de cliente-home no campo ultimos pedidos

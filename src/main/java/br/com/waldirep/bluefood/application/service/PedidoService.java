@@ -1,4 +1,4 @@
-package br.com.waldirep.bluefood.application;
+package br.com.waldirep.bluefood.application.service;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -12,6 +12,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.waldirep.bluefood.domain.pagamento.DadosCartao;
+import br.com.waldirep.bluefood.domain.pagamento.Pagamento;
+import br.com.waldirep.bluefood.domain.pagamento.PagamentoRepository;
+import br.com.waldirep.bluefood.domain.pagamento.StatusPagemento;
 import br.com.waldirep.bluefood.domain.pedido.Carrinho;
 import br.com.waldirep.bluefood.domain.pedido.ItemPedido;
 import br.com.waldirep.bluefood.domain.pedido.ItemPedidoPK;
@@ -20,8 +24,6 @@ import br.com.waldirep.bluefood.domain.pedido.Pedido;
 import br.com.waldirep.bluefood.domain.pedido.Pedido.Status;
 import br.com.waldirep.bluefood.domain.pedido.PedidoRepository;
 import br.com.waldirep.bluefood.util.SecurityUtils;
-import br.com.waldirep.domain.pagamento.DadosCartao;
-import br.com.waldirep.domain.pagamento.StatusPagemento;
 
 @Service
 public class PedidoService {
@@ -34,6 +36,10 @@ public class PedidoService {
 	private ItemPedidoRepository itemPedidoRepository;
 	
 	
+	@Autowired
+	private PagamentoRepository pegamentoRepository;
+	
+	
 	@Value("${bluefood.webservice.url}")
 	private String webServiceURL;
 	
@@ -44,7 +50,7 @@ public class PedidoService {
 	
 	
 	/**
-	 * Metodo que cria o pedido, paga o pedido e retorna o pedido. Cria o pagamento
+	 * Metodo que cria o pedido, Faz a chamada no web service para executar o pagamento, cria o pagamento e o registro do pagamento
 	 * 
 	 * @param carrinho
 	 * @param numCartao
@@ -118,6 +124,14 @@ public class PedidoService {
 				throw new PagamentoException(statusPagamento.getDescricao());
 			
 		}
+			
+			
+		Pagamento pagamento	= new Pagamento();
+		pagamento.setData(LocalDateTime.now());
+		pagamento.setPedido(pedido);
+		pagamento.definirNumeroEBandeira(numCartao);
+		
+		pegamentoRepository.save(pagamento);
 		
 		return pedido;
 		

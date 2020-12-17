@@ -1,4 +1,4 @@
-package br.com.waldirep.domain.pagamento;
+package br.com.waldirep.bluefood.domain.pagamento;
 
 public enum StatusPagemento {
 	
