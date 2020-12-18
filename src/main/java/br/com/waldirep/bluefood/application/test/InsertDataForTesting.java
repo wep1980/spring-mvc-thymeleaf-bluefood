@@ -60,7 +60,37 @@ public class InsertDataForTesting {
 		p.setTaxaEntrega(BigDecimal.valueOf(2));
 		p.setTotal(BigDecimal.valueOf(12.0));
 		
+		Pedido p2 = new Pedido();
+		p2.setData(LocalDateTime.now());
+		p2.setCliente(clientes[0]);
+		p2.setRestaurante(restaurantes[0]);
+		p2.setStatus(Status.Producao);
+		p2.setSubtotal(BigDecimal.valueOf(11));
+		p2.setTaxaEntrega(BigDecimal.valueOf(3));
+		p2.setTotal(BigDecimal.valueOf(13.0));
+		
+		Pedido p3 = new Pedido();
+		p3.setData(LocalDateTime.now());
+		p3.setCliente(clientes[0]);
+		p3.setRestaurante(restaurantes[0]);
+		p3.setStatus(Status.Producao);
+		p3.setSubtotal(BigDecimal.valueOf(12));
+		p3.setTaxaEntrega(BigDecimal.valueOf(4));
+		p3.setTotal(BigDecimal.valueOf(14.0));
+		
+		Pedido p4 = new Pedido();
+		p4.setData(LocalDateTime.now());
+		p4.setCliente(clientes[0]);
+		p4.setRestaurante(restaurantes[0]);
+		p4.setStatus(Status.Producao);
+		p4.setSubtotal(BigDecimal.valueOf(13));
+		p4.setTaxaEntrega(BigDecimal.valueOf(5));
+		p4.setTotal(BigDecimal.valueOf(15.0));
+		
 		pedidoRespository.save(p);
+		pedidoRespository.save(p2);
+		pedidoRespository.save(p3);
+		pedidoRespository.save(p4);
 	}
 	
 	

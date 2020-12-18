@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurante/home}"> <!--Pega a pagina de layout e monta com a de login -- th:with="link=@{/cliente/home}" -> passa variaveis para o layout e o valor dela -->
+	
+	<body>
+	   <!-- Adiciona esse conteudo na pagina de layout -->
+	   <div layout:fragment="content"> 
+		
+				<div>
+					<h1>Relatório de Pedidos</h1>
+					
+					<!-- th:action="@{/restaurante/relatorio/pedidos}" -> Depois da busca volta para a mesma tela -->
+					<form th:action="@{/restaurante/relatorio/pedidos}" method="get" th:object="${filter}">
+						<fieldset>
+							<legend style="font-size:20px; text-transform: uppercase; font-weight: bold;">Filtros</legend> <br/>
+							
+							<label for="numero" style="font-size:18px;">Número do pedido: </label><br>	
+							<input type="text" id="numero" th:field="*{pedidoId}"> <br/>
+							
+							<label for="inicio" style="font-size:18px;">Data inicial: </label> <br>	
+							<input type="date" id="inicio" th:field="*{dataInicial}"> <br/>
+							
+							<label for="fim" style="font-size:18px;">Data final: </label> <br>	
+							<input type="date" id="fim" th:field="*{dataFinal}"> <br/><br/>
+							
+							<input type="submit" value="Buscar">
+						</fieldset>
+					</form>
+				</div>
+				<br/><br/>
+				
+				<!-- A tabela so e vizualizada se existir pedidos -->
+				<div th:if="${pedidos.size() > 0}">
+				<table border="1">
+					<tr>
+						<th>Pedido</th>
+						<th>Nome</th>
+						<th>Endereço</th>
+						<th>Valor</th>
+					</tr>
+					<tr th:each="pedido : ${pedidos}">
+						<td><input type="submit" th:value="${pedido.formattedId}"></td>
+						<td> <span th:text="${pedido.cliente.nome}"></span> </td>
+						<td> <span th:text="${pedido.cliente.formattedCep}"></span> </td>
+						<td> <span th:text="${#numbers.formatCurrency(pedido.total)}"></span> </td>
+					</tr>
+				</table>
+				</div>
+				
+				<span th:if="${pedidos.size() == 0}" id="carrinhoOpcaoTitulo">Nenhum pedido encontrado</span>
+				
+				<br/><br/>
+		
+				<input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/restaurante/home} + '\';'" />
+
+		</div>
+		<br/><br/>
+	</body>
+</html>
+

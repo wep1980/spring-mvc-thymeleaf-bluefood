@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.waldirep.bluefood.application.service.RelatorioService;
 import br.com.waldirep.bluefood.application.service.RestauranteService;
 import br.com.waldirep.bluefood.application.service.ValidationException;
 import br.com.waldirep.bluefood.domain.pedido.Pedido;
 import br.com.waldirep.bluefood.domain.pedido.PedidoRepository;
+import br.com.waldirep.bluefood.domain.pedido.RelatorioPedidoFilter;
 import br.com.waldirep.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.waldirep.bluefood.domain.restaurante.ItemCardapio;
 import br.com.waldirep.bluefood.domain.restaurante.ItemCardapioRepository;
@@ -33,6 +35,7 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteRepository restauranteRepository;
 	
+	
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 	
@@ -40,12 +43,17 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteService restauranteService;
 	
+	
 	@Autowired
 	private ItemCardapioRepository itemCardapioRepository;
 	
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	
+	@Autowired
+	private RelatorioService relatorioService;
 	
 	
 	
@@ -189,7 +197,20 @@ public class RestauranteController {
 	
 	
 	
-	
+	@GetMapping(path = "/relatorio/pedidos")
+	public String relatorioPedidos(@ModelAttribute("relatorioPedidoFilter") RelatorioPedidoFilter filter,
+			Model model) {
+		
+		Integer restauranteId = SecurityUtils.loggedRestaurante().getId(); // pegando o Id do restaurante logado
+		
+		List<Pedido> pedidos = relatorioService.listPedidos(restauranteId, filter);
+		
+		model.addAttribute("pedidos", pedidos);
+		
+		model.addAttribute("filter", filter);
+		
+		return "restaurante-relatorio-pedidos";
+	}
 	
 	
 	

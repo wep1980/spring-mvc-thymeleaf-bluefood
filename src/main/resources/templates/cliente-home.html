@@ -50,7 +50,7 @@
 	        <div th:each="pedido : ${pedidos}">
 	          <input type="button" th:value="${pedido.formattedId} + ' ' + ${pedido.restaurante.nome}" th:onclick="'location.href=\'' + @{/cliente/pedido/view} + '?pedidoId=' + ${pedido.id} + '\';'"> <br/>
 	        </div>
-	        <span th:if="${pedidos.size() == 0}">Não existe nenhum pedido anterior</span>
+	        <span th:if="${pedidos.size() == 0}" id="carrinhoOpcaoTitulo">Não existe nenhum pedido anterior</span>
     </div>
 
     <div style="padding-bottom: 100px;">

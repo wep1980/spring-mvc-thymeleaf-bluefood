@@ -1,5 +1,6 @@
 package br.com.waldirep.bluefood.domain.pedido;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,25 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	
 	
 	public List<Pedido> findByRestaurante_IdOrderByDataDesc(Integer restauranteId);
+	
+	
+	/**
+	 * Busca um pedido do restaurante
+	 * @param pedidoId
+	 * @param restauranteId
+	 * @return
+	 */
+	public Pedido findByIdAndRestaurante_Id(Integer pedidoId, Integer restauranteId);
+	
+	
+	/**
+	 * Busca o restaurante de acordo com a data inicial e a data final dos pedidos
+	 * @param restauranteId
+	 * @param dataInicial
+	 * @param dataFinal
+	 * @return
+	 */
+	@Query("SELECT p FROM Pedido p WHERE p.restaurante.id = ?1 AND p.data BETWEEN ?2 AND ?3")
+	public List<Pedido> findByDateInterval(Integer restauranteId, LocalDateTime dataInicial, LocalDateTime dataFinal);
 
 }
