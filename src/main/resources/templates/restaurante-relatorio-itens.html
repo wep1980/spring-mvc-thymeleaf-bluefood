@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurante/home}"> <!--Pega a pagina de layout e monta com a de login -- th:with="link=@{/cliente/home}" -> passa variaveis para o layout e o valor dela -->
+	
+	<body>
+	   <!-- Adiciona esse conteudo na pagina de layout -->
+	   <div layout:fragment="content"> 
+		
+			<div>
+				<h1>Relatório de Itens</h1>
+				<form method="get" th:action="@{/restaurante/relatorio/itens}" th:object="${relatorioItemFilter}">
+					<fieldset>
+						<legend style="font-size:20px; text-transform: uppercase; font-weight: bold;">Filtros</legend> <br/>
+						
+						<label for="numero" style="font-size:18px;">Item: </label> <br/>	
+						<select id="numero" th:field="*{itemId}">
+						
+						   <option value="0">Todos</option> 
+						    
+						   <!-- th:value="${item.id}" -> Valor que vai para o servidor -- th:text="${item.nome}" -> Valor que aparece na tela -->
+						   <option th:each="item : ${itensCardapio}" th:value="${item.id}" th:text="${item.nome}"/>
+						   
+						</select>  <br/>
+						
+						<label for="inicio" style="font-size:18px;">Data inicial: </label> <br/>	
+						<input type="date" id="inicio" th:field="*{dataInicial}"><br>
+						
+						<label for="fim" style="font-size:18px;">Data final: </label> <br/>	
+						<input type="date" id="fim" th:field="*{dataFinal}"> <br/><br/>
+						
+						<input type="submit" value="Buscar">
+						
+					</fieldset>
+				</form>
+			</div>
+			<br><br>
+			
+			<div th:if="${itensCalculados.size() > 0}">
+				<table border="1">
+					<tr>
+						<th>Item</th>
+						<th>Quantidade</th>
+						<th>Faturamento</th>
+					</tr>
+					<tr th:each="item : ${itensCalculados}">
+						<td> <span th:text="${item.nome}"></span> </td>
+						<td> <span th:text="${item.quantidade}"></span> </td>
+						<td> <span th:text="${#numbers.formatCurrency(item.valor)}"></span> </td>
+					</tr>
+				</table>
+				
+				
+				
+			</div>
+			<span id="carrinhoOpcaoTitulo"	th:if="${itensCalculados.size() == 0}">Nenhum item encontrado</span>
+			<br><br>
+	
+			<input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/restaurante/home} + '\';'" />
+
+		</div>
+		<br><br>
+	</body>
+</html>
+
