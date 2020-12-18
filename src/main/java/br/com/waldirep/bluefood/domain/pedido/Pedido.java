@@ -67,6 +67,22 @@ public class Pedido implements Serializable{
 		public boolean isUltimo() {
 			return ultimo;
 		}
+		
+		
+		/**
+		 * Metodo que retorna o status na ordem
+		 * @param ordem
+		 * @return
+		 */
+		public static Status fromOrdem(int ordem) {
+			
+			for (Status status: Status.values()) {
+				if(status.getOrdem() == ordem) {
+					return status;
+				}
+			}
+			return null;
+		}
 	}
 	
 	
@@ -120,8 +136,23 @@ public class Pedido implements Serializable{
 	
 	
 	
-	
-	
+	/**
+	 * Metodo que descobre o status atual e pega o proximo na ordem
+	 */
+	public void definirProximoStatus() {
+		
+		int ordem = status.getOrdem();
+		
+		Status newStatus =  Status.fromOrdem(ordem + 1);
+		
+		/*
+		 * Pode acontecer de ja estar no ultimo status e no proximo status ser retornado null.
+		 * Evita que isso aconteça
+		 */
+		if(newStatus != null) {
+			this.status = newStatus;
+		}
+	}
 	
 	
 	

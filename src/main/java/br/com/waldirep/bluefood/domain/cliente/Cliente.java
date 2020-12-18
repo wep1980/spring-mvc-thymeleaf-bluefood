@@ -30,4 +30,13 @@ public class Cliente extends Usuario{
 	@Column(length = 8, nullable = false)
 	private String cep;
 
+	
+	/**
+	 * Metodo que formata o cep 00000-000
+	 * Extrai os 5 primeiros digitos coloca um " - " depois deles e concatena com os numeros restantes depois dos 5 primeiros
+	 * @return
+	 */
+	public String getFormattedCep() {
+		return cep.substring(0, 5) + "-" + cep.substring(5);
+	}
 }
