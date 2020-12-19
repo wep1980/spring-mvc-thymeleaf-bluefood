@@ -39,7 +39,7 @@
 						<th>Valor</th>
 					</tr>
 					<tr th:each="pedido : ${pedidos}">
-						<td><input type="submit" th:value="${pedido.formattedId}"></td>
+						<td><input type="submit" th:value="${pedido.formattedId}" th:onclick="'location.href=\'' + @{/restaurante/pedido} + '?pedidoId=' + ${pedido.id} + '\';'"></td>
 						<td> <span th:text="${pedido.cliente.nome}"></span> </td>
 						<td> <span th:text="${pedido.cliente.formattedCep}"></span> </td>
 						<td> <span th:text="${#numbers.formatCurrency(pedido.total)}"></span> </td>

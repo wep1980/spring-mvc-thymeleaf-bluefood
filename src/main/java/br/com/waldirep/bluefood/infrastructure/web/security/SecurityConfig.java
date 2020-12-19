@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 		    .authorizeRequests() //Permite dizer o que e autorizado ou não, depois de autenticado quais URLs tem permissão
-		    .antMatchers("/images/**", "/css/**", "/js/**", "/public", "/sbpay").permitAll() // permite padrões de acesso, todos esses liberados
+		    .antMatchers("/images/**", "/css/**", "/js/**", "/public/**", "/webservice").permitAll() // permite padrões de acesso, todos esses liberados
 	        .antMatchers("/cliente/**").hasRole(Role.CLIENTE.toString()) // acesso para cliente
 	        .antMatchers("/restaurante/**").hasRole(Role.RESTAURANTE.toString()) // acesso para restaurante
 	        .anyRequest().authenticated() // qualquer outra requisição que nao esteja listada acima precisa estar autenticado

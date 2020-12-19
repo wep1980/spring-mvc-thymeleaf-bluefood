@@ -13,7 +13,7 @@
 						<legend style="font-size:20px; text-transform: uppercase; font-weight: bold;">Filtros</legend> <br/>
 						
 						<label for="numero" style="font-size:18px;">Item: </label> <br/>	
-						<select id="numero" th:field="*{itemId}">
+						<select id="numero" th:field="*{itemId}" style="width: 170px; height: 30px;">
 						
 						   <option value="0">Todos</option> 
 						    
@@ -22,10 +22,10 @@
 						   
 						</select>  <br/>
 						
-						<label for="inicio" style="font-size:18px;">Data inicial: </label> <br/>	
+						<label for="inicio" style="font-size:18px;">Data Inicial: </label> <br/>	
 						<input type="date" id="inicio" th:field="*{dataInicial}"><br>
 						
-						<label for="fim" style="font-size:18px;">Data final: </label> <br/>	
+						<label for="fim" style="font-size:18px;">Data Final: </label> <br/>	
 						<input type="date" id="fim" th:field="*{dataFinal}"> <br/><br/>
 						
 						<input type="submit" value="Buscar">
