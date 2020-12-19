@@ -8,44 +8,48 @@
     <meta charset="UTF-8"/>
     <title>BlueFood</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/ff_estiloSistema.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/ff_footer.css}"/>
     <script type="text/javascript" th:src="@{/js/script.js}"></script>
 </head>
 
-<body>
-
-    <header>
-        <div id="divLogoSistema">
-            <span id="spanAuxiliarDeAlinhamentoVertical"></span>
-            
-            <!-- Se o link for null funcionara a / senão coloca o valor do link. Ao clicar na logo sera redirecionado para a pagina cliente-home. @{/} -> redireciona para a pagina de login  -->
-            <a th:href="${link} == null ? @{/} : ${link}">
-                <img id="imgLogoSistema" th:src="@{/images/bf_logotipoSistema.png}"/>
-            </a>
-        </div>
-        
-         <!-- th:if="${#authentication.principal != 'anonymousUser'}" -> Ele so vai aparecer se o usuario estiver logado --> 
-         <div id="divUsuarioLogado" th:if="${#authentication.principal != 'anonymousUser'}">
-         
-                <!-- #authentication.principal -> Representa o objeto da autenticação do usuario -- .principal -> Dentro do #authentication existe um getPrincipal(LoggedUser) -- PEGA O NOME DO USUARIO QUE ESTA LOGADO -->
-				<span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
-				
-				<div th:if="${session.carrinho != null}" style="display: inline;">
-				  <br/><a th:href="@{/cliente/carrinho/visualizar}"><img th:src="@{/images/bf_iconeCarrinho.png}" id="imgIconeCarrinho"></a>
-				</div>
-        </div>
-        
-    </header>
-    <br/>
-    <br/>
-    <!-- Cabeçalho fim -->
-   
-   <!-- Aqui sera adicionado o Conteudo das paginas -->
-   <div layout:fragment="content"></div>
-
-    <!-- Rodapé início -->
-    <br/><br/>
-    
-
-</body>
+	<body class="site">
+	
+	    <header>
+	        <div id="divLogoSistema">
+	            <span id="spanAuxiliarDeAlinhamentoVertical"></span>
+	            
+	            <!-- Se o link for null funcionara a / senão coloca o valor do link. Ao clicar na logo sera redirecionado para a pagina cliente-home. @{/} -> redireciona para a pagina de login  -->
+	            <a th:href="${link} == null ? @{/} : ${link}">
+	                <img id="imgLogoSistema" th:src="@{/images/bf_logotipoSistema.png}"/>
+	            </a>
+	        </div>
+	        
+	         <!-- th:if="${#authentication.principal != 'anonymousUser'}" -> Ele so vai aparecer se o usuario estiver logado --> 
+	         <div id="divUsuarioLogado" th:if="${#authentication.principal != 'anonymousUser'}">
+	         
+	                <!-- #authentication.principal -> Representa o objeto da autenticação do usuario -- .principal -> Dentro do #authentication existe um getPrincipal(LoggedUser) -- PEGA O NOME DO USUARIO QUE ESTA LOGADO -->
+					<span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
+					
+					<div th:if="${session.carrinho != null}" style="display: inline;">
+					  <br/><a th:href="@{/cliente/carrinho/visualizar}"><img th:src="@{/images/bf_iconeCarrinho.png}" id="imgIconeCarrinho"></a>
+					</div>
+	        </div>
+	    </header> <br/><br/>
+	    <!-- Cabeçalho fim -->
+	    
+	    
+	   
+	   <!-- Aqui sera adicionado o Conteudo das paginas -->
+	   <div class="site-content" layout:fragment="content"></div> <br/><br/>
+	   
+	   
+	    
+	     <!-- Rodapé início -->
+	    <footer>
+	      <p>© Desenvolvido por Waldir Escouto Pereira </p>
+	      <a href="https://www.linkedin.com/in/wepdev/" target="none"><img th:src="@{/images/linkedin.png}" alt="Linkedin"></a>
+	    </footer>
+	    
+	</body>
 
 </html>
