@@ -24,27 +24,27 @@ import lombok.Setter;
 public class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
 
-	@EqualsAndHashCode.Include // Equals e hashcode -> comparação por ID
+	@EqualsAndHashCode.Include // Equals e hashcode -> comparaï¿½ï¿½o por ID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "O nome não pode ser vazio")
+	@NotBlank(message = "O nome nÃ£o pode ser vazio")
 	@Size(max = 80, message = "O nome e muito grande")
 	private String nome;
 	
-	@NotBlank(message = "O e-mail não pode ser vazio")
+	@NotBlank(message = "O e-mail nÃ£o pode ser vazio")
 	@Size(max = 60, message = "O e-mail e muito grande")
-	@Email(message = "O e-mail é inválido")
+	@Email(message = "O e-mail Ã© invÃ¡lido")
 	private String email;
 	
-	@NotBlank(message = "A senha não pode ser vazia")
+	@NotBlank(message = "A senha nÃ£o pode ser vazia")
 	@Size(max = 80, message = "A senha e muito grande")
 	private String senha;
 	
-	@NotBlank(message = "O telefone não pode ser vazio")
-	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato inválido")
-	@Column(length = 11, nullable = false) // O telefone e obrigatorio, validação de banco de dados
+	@NotBlank(message = "O telefone nÃ£o pode ser vazio")
+	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato invÃ¡lido")
+	@Column(length = 11, nullable = false) // O telefone e obrigatorio, validaï¿½ï¿½o de banco de dados
 	private String telefone;
 	
 	

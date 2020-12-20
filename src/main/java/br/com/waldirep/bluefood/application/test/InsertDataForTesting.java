@@ -44,7 +44,7 @@ public class InsertDataForTesting {
 	
 	
 
-	@EventListener // Ao iniciar a aplicação o metodo sera invocado apos a inicialização
+	@EventListener // Ao iniciar a aplicaï¿½ï¿½o o metodo sera invocado apos a inicializaï¿½ï¿½o
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
 		Cliente[] clientes = clientes();
@@ -183,7 +183,7 @@ public class InsertDataForTesting {
 		List<Cliente> clientes = new ArrayList<>(); 
 		
 		Cliente c = new Cliente();
-		c.setNome("João Silva");
+		c.setNome("JoÃ£o Silva");
 		c.setEmail("joao@bluefood.com.br");
 		c.setSenha(StringUtils.encrypt("c"));
 		c.setCep("89300100");
@@ -209,8 +209,8 @@ public class InsertDataForTesting {
 	
 	private void itensCardapio(Restaurante[] restaurantes) {
 		ItemCardapio ic = new ItemCardapio();
-		ic.setCategoria("Sanduíche");
-		ic.setDescricao("Delicioso sanduíche com molho");
+		ic.setCategoria("SanduÃ­che");
+		ic.setDescricao("Delicioso sanduÃ­che com molho");
 		ic.setNome("Double Cheese Burger Special");
 		ic.setPreco(BigDecimal.valueOf(23.8));
 		ic.setRestaurante(restaurantes[0]);
@@ -219,8 +219,8 @@ public class InsertDataForTesting {
 		itemCardapioRepository.save(ic);
 		
 		ic = new ItemCardapio();
-		ic.setCategoria("Sanduíche");
-		ic.setDescricao("Sanduíche padrão que mata a fome");
+		ic.setCategoria("SanduÃ­che");
+		ic.setDescricao("SanduÃ­che padrÃ£o que mata a fome");
 		ic.setNome("Cheese Burger Simples");
 		ic.setPreco(BigDecimal.valueOf(17.8));
 		ic.setRestaurante(restaurantes[0]);
@@ -229,9 +229,9 @@ public class InsertDataForTesting {
 		itemCardapioRepository.save(ic);
 		
 		ic = new ItemCardapio();
-		ic.setCategoria("Sanduíche");
-		ic.setDescricao("Sanduíche natural com peito de peru");
-		ic.setNome("Sanduíche Natural da Casa");
+		ic.setCategoria("SanduÃ­che");
+		ic.setDescricao("SanduÃ­che natural com peito de peru");
+		ic.setNome("SanduÃ­che Natural da Casa");
 		ic.setPreco(BigDecimal.valueOf(11.8));
 		ic.setRestaurante(restaurantes[0]);
 		ic.setDestaque(false);
@@ -240,7 +240,7 @@ public class InsertDataForTesting {
 		
 		ic = new ItemCardapio();
 		ic.setCategoria("Bebida");
-		ic.setDescricao("Refrigerante com gás");
+		ic.setDescricao("Refrigerante com gÃ¡s");
 		ic.setNome("Refrigerante Tradicional");
 		ic.setPreco(BigDecimal.valueOf(9));
 		ic.setRestaurante(restaurantes[0]);

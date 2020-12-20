@@ -23,18 +23,18 @@ public class ClienteService {
 	
 	
 	/**
-	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
+	 * REGRAS DE NEGï¿½CIO -> Metodo que salva ou edita
 	 * @param cliente
 	 * @throws ValidationException
 	 */
-	@Transactional // executado em contexto de transação no banco de dados
+	@Transactional // executado em contexto de transaï¿½ï¿½o no banco de dados
 	public void saveCliente(Cliente cliente) throws ValidationException {
 		
 		if(!validateEmail(cliente.getEmail(), cliente.getId())) {
-			throw new ValidationException("O e-mail está duplicado");
+			throw new ValidationException("O e-mail estÃ¡ duplicado");
 		}
 		
-		if(cliente.getId() != null) { // Se for edição
+		if(cliente.getId() != null) { // Se for ediï¿½ï¿½o
 			Cliente clienteDB = clienteRepository.findById(cliente.getId()).orElseThrow(); // Pegando a senha do cliente no BD
 			cliente.setSenha(clienteDB.getSenha()); // Colocando a senha novamente no cliente
 		}else { // Se for um cliente novo
@@ -46,12 +46,12 @@ public class ClienteService {
 	
 	
 	/**
-	 * Método para validar email, true = email valido, false = email duplicado
+	 * Mï¿½todo para validar email, true = email valido, false = email duplicado
 	 * 
-	 * REGRA DE NEGOCIO -> Pesquisa no BD se existe algum cadastro com o mesmo email, se não existir o email pode cadastrar.
-	 *                     Se o email ja existir, é verificado se a operação e de inserir ou editar.
-	 *                     Se o email ja existe e é uma edição, não é permitido colocar um email ja cadastrado.
-	 *                     Se o email ja existe e esta sendo feita uma alteração de email do proprio registro e permitido a alteração
+	 * REGRA DE NEGOCIO -> Pesquisa no BD se existe algum cadastro com o mesmo email, se nï¿½o existir o email pode cadastrar.
+	 *                     Se o email ja existir, ï¿½ verificado se a operaï¿½ï¿½o e de inserir ou editar.
+	 *                     Se o email ja existe e ï¿½ uma ediï¿½ï¿½o, nï¿½o ï¿½ permitido colocar um email ja cadastrado.
+	 *                     Se o email ja existe e esta sendo feita uma alteraï¿½ï¿½o de email do proprio registro e permitido a alteraï¿½ï¿½o
 	 *                     
 	 * @param cliente
 	 * @param id
@@ -66,7 +66,7 @@ public class ClienteService {
 		
 		Cliente clienteEmail = clienteRepository.findByEmail(email);
 		if(clienteEmail != null) { // Se existir o email (Foi encontrado um cliente com o mesmo email) retorna false
-			if(id == null) { // Se existe o email e o id e null, O cliente não existe ainda porem esta tentando cadastrar um email que ja existe - retorna null
+			if(id == null) { // Se existe o email e o id e null, O cliente nï¿½o existe ainda porem esta tentando cadastrar um email que ja existe - retorna null
 				return false; // RETORNA FALSE PORQUE NO NOVO CADASTRO JA EXISTE UM EMAIL IGUAL
 			}
 			if(!clienteEmail.getId().equals(id)) { // se existe o email e um cliente ja cadastrado esta tentando editar o email com um que ja existe retorna false 

@@ -20,7 +20,7 @@ import br.com.waldirep.bluefood.util.FileType;
 public @interface UploadConstraint {
 	
 	
-	String message() default "Arquivo inv·lido";
+	String message() default "Arquivo inv√°lido";
 	FileType[] acceptedTypes();
 	
 	Class<?>[] groups() default {};

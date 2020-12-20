@@ -37,21 +37,21 @@ public class RestauranteService {
 	private ItemCardapioRepository itemCardapioRepository;
 	
 	/**
-	 * REGRAS DE NEGÓCIO -> Metodo que salva ou edita
+	 * REGRAS DE NEGï¿½CIO -> Metodo que salva ou edita
 	 * @param restaurante
 	 * @throws ValidationException
 	 */
- 	@Transactional // executado em contexto de transação no banco de dados
+ 	@Transactional // executado em contexto de transaï¿½ï¿½o no banco de dados
 	public void saveRestaurante(Restaurante restaurante) throws ValidationException {
 		
 		if(!validateEmail(restaurante.getEmail(), restaurante.getId())) {
-			throw new ValidationException("O e-mail está duplicado");
+			throw new ValidationException("O e-mail estÃ¡ duplicado");
 		}
 		
-		if(restaurante.getId() != null) { // Se for edição
+		if(restaurante.getId() != null) { // Se for ediï¿½ï¿½o
 			Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow(); // Pegando a senha do restaurante no BD
-			restaurante.setSenha(restauranteDB.getSenha()); // Colocando a senha novamente no restaurante, pois ela não sofre alteração
-			restaurante.setLogotipo(restauranteDB.getLogotipo()); // Colocando a logo novamente no restaurante, pois ela não sofre alteração
+			restaurante.setSenha(restauranteDB.getSenha()); // Colocando a senha novamente no restaurante, pois ela nï¿½o sofre alteraï¿½ï¿½o
+			restaurante.setLogotipo(restauranteDB.getLogotipo()); // Colocando a logo novamente no restaurante, pois ela nï¿½o sofre alteraï¿½ï¿½o
 			restauranteRepository.save(restaurante);
 			
 		}else { // Se for um restaurante novo
@@ -66,12 +66,12 @@ public class RestauranteService {
 	
 	
 	/**
-	 * Método para validar email, true = email valido, false = email duplicado
+	 * Mï¿½todo para validar email, true = email valido, false = email duplicado
 	 * 
-	 * REGRA DE NEGOCIO -> Pesquisa no BD se existe algum cadastro com o mesmo email, se não existir o email pode cadastrar.
-	 *                     Se o email ja existir, é verificado se a operação e de inserir ou editar.
-	 *                     Se o email ja existe e é uma edição, não é permitido colocar um email ja cadastrado.
-	 *                     Se o email ja existe e esta sendo feita uma alteração de email do proprio registro e permitido a alteração
+	 * REGRA DE NEGOCIO -> Pesquisa no BD se existe algum cadastro com o mesmo email, se nï¿½o existir o email pode cadastrar.
+	 *                     Se o email ja existir, ï¿½ verificado se a operaï¿½ï¿½o e de inserir ou editar.
+	 *                     Se o email ja existe e ï¿½ uma ediï¿½ï¿½o, nï¿½o ï¿½ permitido colocar um email ja cadastrado.
+	 *                     Se o email ja existe e esta sendo feita uma alteraï¿½ï¿½o de email do proprio registro e permitido a alteraï¿½ï¿½o
 	 *                     
 	 * @param cliente
 	 * @param id
@@ -86,7 +86,7 @@ public class RestauranteService {
 		
 		Restaurante restauranteEmail = restauranteRepository.findByEmail(email);
 		if(restauranteEmail != null) { // Se existir o email (Foi encontrado um cliente com o mesmo email) retorna false
-			if(id == null) { // Se existe o email e o id e null, O cliente não existe ainda porem esta tentando cadastrar um email que ja existe - retorna null
+			if(id == null) { // Se existe o email e o id e null, O cliente nï¿½o existe ainda porem esta tentando cadastrar um email que ja existe - retorna null
 				return false; // RETORNA FALSE PORQUE NO NOVO CADASTRO JA EXISTE UM EMAIL IGUAL
 			}
 			if(!restauranteEmail.getId().equals(id)) { // se existe o email e um cliente ja cadastrado esta tentando editar o email com um que ja existe retorna false 
@@ -116,16 +116,16 @@ public class RestauranteService {
 			restaurantes = restauranteRepository.findByCategorias_Id(filter.getCategoriaId());
 			
 		} else {
-			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " não é suportado");
+			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " nÃ£o Ã© suportado");
 		}
 		
-		// Itarenado nos restaurantes que foram encontrados, com o iterator podemos modificar um item da coleção, no caso remover.
+		// Itarenado nos restaurantes que foram encontrados, com o iterator podemos modificar um item da coleï¿½ï¿½o, no caso remover.
 		Iterator<Restaurante> it = restaurantes.iterator();
 		while(it.hasNext()) {
 			Restaurante restaurante = it.next();
 			double taxaEntrega = restaurante.getTaxaEntrega().doubleValue(); // doubleValue() -> convertendo para double
 			
-			// De acordo com a pesquisa retira ou não retira os restaurantes com entrega gratis
+			// De acordo com a pesquisa retira ou nï¿½o retira os restaurantes com entrega gratis
 			if(filter.isEntregaGratis() && taxaEntrega > 0 || !filter.isEntregaGratis() && taxaEntrega == 0) {
 				it.remove(); // remove os elementos da lista
 			}

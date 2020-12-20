@@ -5,7 +5,7 @@ import java.util.Comparator;
 import br.com.waldirep.bluefood.domain.restaurante.SearchFilter.Order;
 
 /**
- * Compara os Restaurantes para saber se vai antes ou depois na coleção
+ * Compara os Restaurantes para saber se vai antes ou depois na coleï¿½ï¿½o
  * @author wepbi
  *
  */
@@ -28,24 +28,24 @@ public class RestauranteComparator implements Comparator<Restaurante>{
 
 
 	/*
-	 * Processo de ordenação na lista 
-	 * compareTo() -> por padrão trabalham em ordem crescente
+	 * Processo de ordenaï¿½ï¿½o na lista 
+	 * compareTo() -> por padrï¿½o trabalham em ordem crescente
 	 */
 	@Override
 	public int compare(Restaurante r1, Restaurante r2) {
 		int result;
 		
-		if(filter.getOrder() == Order.Taxa) { // Se for uma ordenação por taxa
+		if(filter.getOrder() == Order.Taxa) { // Se for uma ordenaï¿½ï¿½o por taxa
 			result = r1.getTaxaEntrega().compareTo(r2.getTaxaEntrega());
 			
 		} else if (filter.getOrder() == Order.Tempo) {
 			result = r1.calcularTempoEntrega(cep).compareTo(r2.calcularTempoEntrega(cep));
 			
 		} else {
-			throw new IllegalStateException("O valor de ordenação " + filter.getOrder() + " não é válido");
+			throw new IllegalStateException("O valor de ordenaÃ§Ã£o " + filter.getOrder() + " nÃ£o Ã© vÃ¡lido");
 		}
 		
-		return filter.isAsc() ? result : -result; // Se o resultado for ascendente(crescente) retorna o proprio resultado, senão o descendente(decrescente) é revertido o sinal e retorna crescente. + crescente, - decrescente, 0 se for ==
+		return filter.isAsc() ? result : -result; // Se o resultado for ascendente(crescente) retorna o proprio resultado, senï¿½o o descendente(decrescente) ï¿½ revertido o sinal e retorna crescente. + crescente, - decrescente, 0 se for ==
 	}
 
 	

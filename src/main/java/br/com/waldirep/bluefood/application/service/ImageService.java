@@ -17,21 +17,21 @@ public class ImageService {
 	 * Diretirio para logotipos
 	 */
 	@Value("${bluefood.files.logotipo}") // Propriedade criada no application.properties
-	private String logotiposDir; // Atributo de serviço
+	private String logotiposDir; // Atributo de serviï¿½o
 	
 	
 	/**
 	 * Diretirio para categorias
 	 */
 	@Value("${bluefood.files.categoria}") // Propriedade criada no application.properties
-	private String categoriasDir; // Atributo de serviço
+	private String categoriasDir; // Atributo de serviï¿½o
 	
 	
 	/**
 	 * Diretirio para comidas
 	 */
 	@Value("${bluefood.files.comida}") // Propriedade criada no application.properties
-	private String comidasDir; // Atributo de serviço
+	private String comidasDir; // Atributo de serviï¿½o
 	
 	
 	
@@ -58,7 +58,7 @@ public class ImageService {
 	/**
 	 * Metodo que verifica o tipo da imagem, verifica qual diretorio esta a imagem, pega a imagem trasnforma em um array[] de bytes e retorna o array de bytes para o ImageController
 	 * @param type -> categoria, comida ou logotipo
-	 * Como e um serviço não sera lançada uma IOException e sim ApplicationServiceException
+	 * Como e um serviï¿½o nï¿½o sera lanï¿½ada uma IOException e sim ApplicationServiceException
 	 * @return
 	 */
 	public byte[] getBytes(String type, String imgName) {
@@ -77,7 +77,7 @@ public class ImageService {
 			dir = categoriasDir;
 			
 		}else {
-			throw new Exception(type + "Não é um tipo de imagem válido");
+			throw new Exception(type + "NÃ£o Ã© um tipo de imagem vÃ¡lido");
 		}
 		
 		return IOUtils.getBytes(Paths.get(dir, imgName)); // Vai vir do banco de dados

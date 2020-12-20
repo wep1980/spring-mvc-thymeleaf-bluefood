@@ -4,8 +4,8 @@ public enum StatusPagemento {
 	
 	
 	Autorizado("Autorizado"),
-	NaoAutorizado("N„o autorizado pela instituiÁ„o financeira"),
-	CartaoInvalido("Cart„o inv·lido ou bloqueado");
+	NaoAutorizado("N√£o autorizado pela institui√ß√£o financeira , o n√∫mero do cart√£o deve iniciar com 1111"),
+	CartaoInvalido("Cart√£o inv√°lido , voc√™ deve digitar 16 n√∫meros");
 	
 	String descricao;
 	

@@ -35,22 +35,22 @@ public class ItemCardapio implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@javax.validation.constraints.NotBlank(message = "O nome não pode ser vazio")
+	@javax.validation.constraints.NotBlank(message = "O nome nÃ£o pode ser vazio")
 	@Size(max = 50)
 	private String nome;
 	
-	@javax.validation.constraints.NotBlank(message = "A categoria não pode ser vazia")
+	@javax.validation.constraints.NotBlank(message = "A categoria nÃ£o pode ser vazia")
 	@Size(max = 25)
 	private String categoria;
 	
-	@javax.validation.constraints.NotBlank(message = "A descrição não pode ser vazia")
+	@javax.validation.constraints.NotBlank(message = "A descriÃ§Ã£o nÃ£o pode ser vazia")
 	@Size(max = 80)
 	private String descricao;
 	
 	@Size(max = 80)
 	private String imagem;
 	
-	@NotNull(message = "O preço não pode ser vazio")
+	@NotNull(message = "O preÃ§o nÃ£o pode ser vazio")
 	@Min(0)
 	private BigDecimal preco;
 	
@@ -59,10 +59,10 @@ public class ItemCardapio implements Serializable{
 	
 	@NotNull
 	@JoinColumn(name = "restaurante_id")
-	@ManyToOne // (O lado onde fica o Many manda na relação. Regra da JPA) Um restaurante tem muitos itens de cardapio, O dono da relação e o itemCardapio -- Na relação ManyToMany pode ser qualquer lado o dono da relação
+	@ManyToOne // (O lado onde fica o Many manda na relaï¿½ï¿½o. Regra da JPA) Um restaurante tem muitos itens de cardapio, O dono da relaï¿½ï¿½o e o itemCardapio -- Na relaï¿½ï¿½o ManyToMany pode ser qualquer lado o dono da relaï¿½ï¿½o
 	private Restaurante restaurante;
 	
-	@UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo não é um arquivo de imagem válida")
+	@UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo nÃ£o ï¿½ um arquivo de imagem vï¿½lida")
 	private transient MultipartFile imagemFile;
 	
 	

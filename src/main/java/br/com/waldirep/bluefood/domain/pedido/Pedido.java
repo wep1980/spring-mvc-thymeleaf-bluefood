@@ -35,14 +35,14 @@ public class Pedido implements Serializable{
 	
 	
 	/**
-	 * Quando o pedido e criado a primeira vez ele entra em produção
+	 * Quando o pedido e criado a primeira vez ele entra em produï¿½ï¿½o
 	 * @author wepbi
 	 *
 	 */
 	public enum Status {
-		Producao(1, "Em produção", false),
+		Producao(1, "Em produÃ§Ã£o", false),
 		Entrega(2, "Saiu para entrega", false),
-		Concluido(3, "Concluído", true);
+		Concluido(3, "ConcluÃ­do", true);
 		
 		Status(int ordem, String descricao, boolean ultimo){
 			this.ordem = ordem;
@@ -116,11 +116,11 @@ public class Pedido implements Serializable{
 	private BigDecimal total;
 	
 	//fetch = FetchType.EAGER -> Carregar os itens do pedidos
-	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER) // RELACIONAMENTO ENTRE CHAVES JPA -> A configuracão com itemPedido e pelo id da classe ItemPedido junto com o pedido da classe ItemPedidoPK = id.pedido
+	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER) // RELACIONAMENTO ENTRE CHAVES JPA -> A configuracï¿½o com itemPedido e pelo id da classe ItemPedido junto com o pedido da classe ItemPedidoPK = id.pedido
 	private Set<ItemPedido> itens;
 	
 	/*
-	 * Como na classe Pagamento foi eleita a dona da relação, aqui e necessario colocar o mappedBy referenciando o atributo(pedido) da dona do relacionamento, classe Pagamento
+	 * Como na classe Pagamento foi eleita a dona da relaï¿½ï¿½o, aqui e necessario colocar o mappedBy referenciando o atributo(pedido) da dona do relacionamento, classe Pagamento
 	 */
 	@OneToOne(mappedBy = "pedido")
     private Pagamento pagamento;
@@ -147,7 +147,7 @@ public class Pedido implements Serializable{
 		
 		/*
 		 * Pode acontecer de ja estar no ultimo status e no proximo status ser retornado null.
-		 * Evita que isso aconteça
+		 * Evita que isso aconteï¿½a
 		 */
 		if(newStatus != null) {
 			this.status = newStatus;

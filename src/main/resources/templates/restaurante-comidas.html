@@ -12,11 +12,11 @@
 			<span id="restauranteOpcaoTitulo" th:text="${item.nome}"></span><br />
 			<span th:text="${item.categoria}"></span><br />
 			<span th:text="${item.descricao}"></span><br />
-			<span th:text="${#numbers.formatCurrency(item.preco)}"></span><br />
+			<span th:text="${#numbers.formatCurrency(item.preco)}"></span> <br/><br/>
 			<input type="button" value="Remover" th:onclick="'location.href=\'' + @{/restaurante/comidas/remover} + '?itemId=' + ${item.id} + '\';'"><br /><br />
 		</div>
 		
-		<span th:if="${itensCardapio.size() == 0}">Não existem comidas cadastradas<br /><br /></span>	
+		<span th:if="${itensCardapio.size() == 0}" style="text-transform: uppercase; font-size: 13px; font-weight: bold;">Não existem comidas cadastradas<br /><br /></span>	
 
 		<div id="mensagemDeSucesso" th:if="${msg != null}">
 			<span th:text="${msg}"></span><br />

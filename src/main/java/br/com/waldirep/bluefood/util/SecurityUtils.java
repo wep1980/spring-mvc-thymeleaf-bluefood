@@ -9,7 +9,7 @@ import br.com.waldirep.bluefood.domain.restaurante.Restaurante;
 import br.com.waldirep.bluefood.infrastructure.web.security.LoggedUser;
 
 /**
- * Classe com alguns ultilitarios de segurança
+ * Classe com alguns ultilitarios de seguranï¿½a
  * @author wepbi
  *
  */
@@ -26,11 +26,11 @@ public class SecurityUtils {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
 		/*
-		 * Em alguma situações em que o authentication vai existir como uma autenticação anonima
-		 * (como se não tivesse autenticado)
+		 * Em alguma situaï¿½ï¿½es em que o authentication vai existir como uma autenticaï¿½ï¿½o anonima
+		 * (como se nï¿½o tivesse autenticado)
 		 */
 		if(authentication instanceof AnonymousAuthenticationToken) {
-			return null; // não logado
+			return null; // nï¿½o logado
 		}
 		return (LoggedUser) authentication.getPrincipal();
 	}
@@ -41,10 +41,10 @@ public class SecurityUtils {
 	public static Cliente loggedCliente() {
 		LoggedUser loggedUser = loggedUser(); // pegando o usuario logado
 		if(loggedUser == null) {
-			throw new IllegalStateException("Não existe um usuário logado");
+			throw new IllegalStateException("NÃ£o existe um usuÃ¡rio logado");
 		}
-		if(!(loggedUser.getUsuario() instanceof Cliente)) { // Se não for cliente
-			throw new IllegalStateException("O usuário logado não é um cliente");
+		if(!(loggedUser.getUsuario() instanceof Cliente)) { // Se nï¿½o for cliente
+			throw new IllegalStateException("O usuÃ¡rio logado nÃ£o Ã© um cliente");
 		}
 		return (Cliente) loggedUser.getUsuario(); // Retorna o cliente logado
 	}
@@ -56,10 +56,10 @@ public class SecurityUtils {
 		public static Restaurante loggedRestaurante() {
 			LoggedUser loggedUser = loggedUser(); // pegando o usuario logado
 			if(loggedUser == null) {
-				throw new IllegalStateException("Não existe um usuário logado");
+				throw new IllegalStateException("NÃ£o existe um usuÃ¡rio logado");
 			}
-			if(!(loggedUser.getUsuario() instanceof Restaurante)) { // Se não for cliente
-				throw new IllegalStateException("O usuário logado não é um restaurante");
+			if(!(loggedUser.getUsuario() instanceof Restaurante)) { // Se nï¿½o for cliente
+				throw new IllegalStateException("O usuÃ¡rio logado nÃ£o Ã¡ um restaurante");
 			}
 			return (Restaurante) loggedUser.getUsuario(); // Retorna o cliente logado
 		}

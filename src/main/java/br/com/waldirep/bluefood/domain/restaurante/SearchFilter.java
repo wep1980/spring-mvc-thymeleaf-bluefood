@@ -15,7 +15,7 @@ public class SearchFilter {
 	
 	/**
 	 * Determina se a procura e por texto ou categoria
-	 * A ação do usuario que vai decidir qual e o tipo de informação, se a procura for pela caixa de texto o tipo sera texto, se a procura for clicando em categorias o searchType tem que ser igual a categoria
+	 * A aÃ§Ã£o do usuario que vai decidir qual e o tipo de informaï¿½ï¿½o, se a procura for pela caixa de texto o tipo sera texto, se a procura for clicando em categorias o searchType tem que ser igual a categoria
 	 * @author wepbi
 	 *
 	 */
@@ -41,7 +41,7 @@ public class SearchFilter {
 	
 	//------------------------------------------------ INICIO DOS FILTROS ------------------------------------------------------------------------------------------------------------------------
 	
-	// A taxa e criada na geração do objeto
+	// A taxa e criada na geraï¿½ï¿½o do objeto
 	private Order order = Order.Taxa;
 	
 	private boolean asc;
@@ -53,11 +53,11 @@ public class SearchFilter {
 	
 	
 	/**
-	 * Metodo que processa a informação do tipo de busca, texto ou categoria
+	 * Metodo que processa a informaï¿½ï¿½o do tipo de busca, texto ou categoria
 	 */
 	public void processFilter(String cmdString) {
 		
-		if(!StringUtils.isEmpty(cmdString)) { // Se o cmdString não for vazio
+		if(!StringUtils.isEmpty(cmdString)) { // Se o cmdString nï¿½o for vazio
 			
 			// Command.valueOf(cmdString); -> Todos os enums possuem esse metodo que vc passa uma string e ele retorna o enum associado. O nome submetido no front end tem que ser igual ao que esta aqui
 			Command cmd = Command.valueOf(cmdString);
@@ -65,8 +65,8 @@ public class SearchFilter {
 			if(cmd == Command.EntregaGratis) {
 				
 				/**
-				 * Se a entrega gratis estava marcada, a entrega gratis foi clicada então ela precisa ser desmarcada( se era true passa a ser false ) assim muda o estado no objeto, quando a pagina e direcionada no binding e verificado que é falso e desmarca o botão
-				 * RESUMO : EM UMA NOVA REQUISIÇÃO DA PÁGINA O BOTÃO ESTARA DESMARCADO, MOSTRANDO SEU ESTADO REAL
+				 * Se a entrega gratis estava marcada, a entrega gratis foi clicada entï¿½o ela precisa ser desmarcada( se era true passa a ser false ) assim muda o estado no objeto, quando a pagina e direcionada no binding e verificado que ï¿½ falso e desmarca o botï¿½o
+				 * RESUMO : EM UMA NOVA REQUISIï¿½ï¿½O DA Pï¿½GINA O BOTï¿½O ESTARA DESMARCADO, MOSTRANDO SEU ESTADO REAL
 				 */
 				entregaGratis = !entregaGratis;
 				

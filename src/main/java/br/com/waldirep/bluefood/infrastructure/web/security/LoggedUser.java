@@ -40,10 +40,10 @@ public class LoggedUser implements UserDetails{
 		}else if (usuario instanceof Restaurante) {
 			role = Role.RESTAURANTE;
 		} else {
-			throw new IllegalStateException("O tipo de usuário não é válido");
+			throw new IllegalStateException("O tipo de usuÃ¡rio nÃ£o Ã© vÃ¡lido");
 		}
 		this.role = role;
-		// Por padrão quando ocorre o processo de autenticação o spring coloca no inicio dos dos roles ROLE_
+		// Por padrï¿½o quando ocorre o processo de autenticaï¿½ï¿½o o spring coloca no inicio dos dos roles ROLE_
 		this.roles = List.of(new SimpleGrantedAuthority("ROLE_" + role));
 	}
 	

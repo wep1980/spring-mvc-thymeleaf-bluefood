@@ -5,7 +5,7 @@ import javax.validation.constraints.Pattern;
 public class DadosCartao {
 	
 	
-	@Pattern(regexp = "\\d{16}", message = "O número do cartão e inválido") // Validação do campo que so aceita 16 digitos(numeros) seguidos
+	@Pattern(regexp = "\\d{16}", message = "O nÃºmero do cartÃ£o e invÃ¡lido") // Validaï¿½ï¿½o do campo que so aceita 16 digitos(numeros) seguidos
 	private String numCartao;
 	
 	

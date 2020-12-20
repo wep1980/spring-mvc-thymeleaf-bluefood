@@ -293,6 +293,8 @@ div#mensagemDeErro {
 	color: #ffffff;
 	margin-left: auto;
 	margin-right: auto;
+	text-transform: uppercase;
+	font-size: 13px;
 }
 
 div#mensagemDeSucesso {
@@ -303,4 +305,9 @@ div#mensagemDeSucesso {
 	color: #ffffff;
 	margin-left: auto;
 	margin-right: auto;
+	text-transform: uppercase;
+	font-size: 13px;
 }
+
+
+

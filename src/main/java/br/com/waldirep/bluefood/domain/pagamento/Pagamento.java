@@ -28,17 +28,17 @@ public class Pagamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY) //GenerationType.IDENTITY -> não e necesserio usar pois o id vai vir da classe Pedido
+	//@GeneratedValue(strategy = GenerationType.IDENTITY) //GenerationType.IDENTITY -> nï¿½o e necesserio usar pois o id vai vir da classe Pedido
 	private Integer id;
 	
 	/*
 	 * Esse lado e o dono do relacionamenrto.
-	 * Existe um relacionamento bi direcional com a classe Pedido, embora não seja necessario.
-	 * É comum em relacionamentos OneToOne que as tebelas sejam relacionadas com a mesma chave primaria
+	 * Existe um relacionamento bi direcional com a classe Pedido, embora nï¿½o seja necessario.
+	 * ï¿½ comum em relacionamentos OneToOne que as tebelas sejam relacionadas com a mesma chave primaria
 	 */
 	@NotNull
 	@OneToOne
-	@MapsId // Pega o Id do outro lado da relação na classe Pedido e utiliza no id aqui da classe private Integer id - UTILIZAÇÃO DA MESMA CHAVE PRIMARIA NAS 2 CLASSES
+	@MapsId // Pega o Id do outro lado da relaï¿½ï¿½o na classe Pedido e utiliza no id aqui da classe private Integer id - UTILIZAï¿½ï¿½O DA MESMA CHAVE PRIMARIA NAS 2 CLASSES
 	private Pedido pedido;
 	
 	@NotNull
@@ -52,7 +52,7 @@ public class Pagamento implements Serializable{
 	/*
 	 * Quando ocorre mapeamento com ENUM a JPA cria uma coluna com valores numeros inteiros e utilizar o indice do enum como valor
 	 */
-	@Enumerated(EnumType.STRING) // Pega o texto no enum, pode ser pegar o numero também
+	@Enumerated(EnumType.STRING) // Pega o texto no enum, pode ser pegar o numero tambï¿½m
 	@Column(nullable = false, length = 10)
 	private BandeiraCartao bandeiraCartao;
 	
@@ -62,12 +62,12 @@ public class Pagamento implements Serializable{
 	/**
 	 * Metodo que define o numero final do cartao e a bandeira
 	 * 
-	 * REGRAS : Pega os 4 ultimos digitos do cartão
+	 * REGRAS : Pega os 4 ultimos digitos do cartï¿½o
 	 * @param numCartao
 	 */
 	public void definirNumeroEBandeira(String numCartao) {
 		
-		// Pega o numero do cartão da posição 12 em diante, como o cartao tem 16 digitos ele vai pegar os 4 ultimos
+		// Pega o numero do cartï¿½o da posiï¿½ï¿½o 12 em diante, como o cartao tem 16 digitos ele vai pegar os 4 ultimos
 		numCartaoFinal = numCartao.substring(12);
 		bandeiraCartao = getBandeira(numCartao);
 	}
@@ -80,6 +80,7 @@ public class Pagamento implements Serializable{
 	 * @return
 	 */
 	private BandeiraCartao getBandeira(String numCartao) {
+		
 		if(numCartao.startsWith("0000")) {
 			return BandeiraCartao.AMEX;
 		}
@@ -95,32 +96,5 @@ public class Pagamento implements Serializable{
 		return BandeiraCartao.VISA;
 	}
 
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

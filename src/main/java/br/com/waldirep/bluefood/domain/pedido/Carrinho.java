@@ -22,11 +22,11 @@ public class Carrinho implements Serializable{
 	
 	
 	/**
-	 * Método que adiciona itens do cardapio no carrinho
+	 * Mï¿½todo que adiciona itens do cardapio no carrinho
 	 * 
-	 * REGRAS : No mesmo carrinho não é permitido misturar itens de restaurantes diferentes.
+	 * REGRAS : No mesmo carrinho nï¿½o ï¿½ permitido misturar itens de restaurantes diferentes.
 	 *          A partir do primeiro item colocado no carrinho o restaurante e selecionado e todos os itens so podem ser desse restaurante.
-	 *          No carrinho não pode ser inserido o mesmo elemento.
+	 *          No carrinho nï¿½o pode ser inserido o mesmo elemento.
 	 * 
 	 * @param itemCardapio
 	 * @param quantidade
@@ -45,9 +45,9 @@ public class Carrinho implements Serializable{
 			throw new RestauranteDiferenteException();
 		}
 		
-		if(!exists(itemCardapio)) { // Se não existe o item de cardapio no carrinho, ele é ADICIONADO
+		if(!exists(itemCardapio)) { // Se nï¿½o existe o item de cardapio no carrinho, ele ï¿½ ADICIONADO
 			
-			// No carrinho não pode ser inserido o mesmo elemento
+			// No carrinho nï¿½o pode ser inserido o mesmo elemento
 			
 			ItemPedido itemPedido = new ItemPedido();
 			
@@ -55,7 +55,7 @@ public class Carrinho implements Serializable{
 			itemPedido.setQuantidade(quantidade);
 			itemPedido.setObservacoes(observacoes);
 			
-			// O preço do item do cardapio pode mudar, mas o preço do item do pedido tem que se manter da epoca da compra então essa informação e necessaria, pois o preço do pedido não pode ser alterado
+			// O preï¿½o do item do cardapio pode mudar, mas o preï¿½o do item do pedido tem que se manter da epoca da compra entï¿½o essa informaï¿½ï¿½o e necessaria, pois o preï¿½o do pedido nï¿½o pode ser alterado
 			itemPedido.setPreco(itemCardapio.getPreco());
 			
 			itens.add(itemPedido);
@@ -67,7 +67,7 @@ public class Carrinho implements Serializable{
 	/**
 	 * Metodo que recebe e adiciona um item de pedido.
 	 * metodo que duplica um pedido
-	 * Como ja e feita toda a validação no método adicionarItem() nao é necessario tratar exceção aqui
+	 * Como ja e feita toda a validaï¿½ï¿½o no mï¿½todo adicionarItem() nao ï¿½ necessario tratar exceï¿½ï¿½o aqui
 	 * @param itemPedido
 	 */
 	public void adicionarItem(ItemPedido itemPedido) {
@@ -86,7 +86,7 @@ public class Carrinho implements Serializable{
 			ItemPedido itemPedido = iterator.next();
 			if(itemPedido.getItemCardapio().getId().equals(itemCardapio.getId())) {
 				iterator.remove();
-				break; // Ja que não possui elementos de item de cardapio repetidos assim que ele encontrar o item não existe a necessidade de continuar procurando
+				break; // Ja que nï¿½o possui elementos de item de cardapio repetidos assim que ele encontrar o item nï¿½o existe a necessidade de continuar procurando
 			}
 		}
 		
@@ -112,7 +112,7 @@ public class Carrinho implements Serializable{
 				return true; // Se ja possui um item do cardapio no carrinho igual ao que esta sendo inserido returna true, POIS JA EXISTE O ITEM NO CARRINHO
 			}
 		}
-		return false; // O item de cardapio ainda não existe no carrinho, retorna false
+		return false; // O item de cardapio ainda nï¿½o existe no carrinho, retorna false
 	}
 	
 	
@@ -148,27 +148,14 @@ public class Carrinho implements Serializable{
 	
 	
 	/**
-	 * Metodo (Atalho) que indentifica se o carrinho esta vazio ou não 
+	 * Metodo (Atalho) que indentifica se o carrinho esta vazio ou nï¿½o 
 	 * @return
 	 */
 	public boolean vazio() {
 		return itens.size() == 0;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 }

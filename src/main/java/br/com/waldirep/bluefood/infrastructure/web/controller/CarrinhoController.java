@@ -19,13 +19,13 @@ import br.com.waldirep.bluefood.domain.restaurante.ItemCardapio;
 import br.com.waldirep.bluefood.domain.restaurante.ItemCardapioRepository;
 
 /**
- * Controller que vai realizar todas as operações do carrinho
+ * Controller que vai realizar todas as operaï¿½ï¿½es do carrinho
  * @author wepbi
  *
  */
 @Controller
 @RequestMapping("/cliente/carrinho")
-@SessionAttributes("carrinho") // Atributos de sessão, continuam no Model mesmo após varias requisições
+@SessionAttributes("carrinho") // Atributos de sessï¿½o, continuam no Model mesmo apï¿½s varias requisiï¿½ï¿½es
 public class CarrinhoController {
 
 	@Autowired
@@ -39,7 +39,7 @@ public class CarrinhoController {
 	/**
 	 * Metodo que cria um carrinho novo
 	 * 
-	 * REGRA : Quando for necessario acessar o atributo carrinho que esteja no model, se ele não existir o spring vai utilizar esse metodo para criar o carrinho, assim garante que o carrinho vai existir desde o primeiro acesso
+	 * REGRA : Quando for necessario acessar o atributo carrinho que esteja no model, se ele nï¿½o existir o spring vai utilizar esse metodo para criar o carrinho, assim garante que o carrinho vai existir desde o primeiro acesso
 	 * @return
 	 */
 	@ModelAttribute("carrinho") 
@@ -58,7 +58,7 @@ public class CarrinhoController {
 	
 	/**
 	 * Metodo que adiciona itens no carrinho
-	 * O carrinho precisa estar na sessão do usuario
+	 * O carrinho precisa estar na sessï¿½o do usuario
 	 * @param itemId
 	 * @param quantidade
 	 * @param observacoes
@@ -77,7 +77,7 @@ public class CarrinhoController {
 		try {
 			carrinho.adicionarItem(itemCardapio, quantidade, observacoes);
 		} catch (RestauranteDiferenteException e) {
-			model.addAttribute("msg", "Não é possível misturar comidas de restaurantes diferentes");
+			model.addAttribute("msg", "NÃ£o Ã© possÃ­vel misturar comidas de restaurantes diferentes");
 		}
 		
 		return "cliente-carrinho";
@@ -98,7 +98,7 @@ public class CarrinhoController {
 	    carrinho.removerItem(itemCardapio);
 	
 	    if(carrinho.vazio()) {
-	    	sessionStatus.setComplete(); // elimina da sessão os atributos que estão no carrinho
+	    	sessionStatus.setComplete(); // elimina da sessï¿½o os atributos que estï¿½o no carrinho
 	    }
 	    return "cliente-carrinho";
 	}

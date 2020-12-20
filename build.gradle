@@ -14,6 +14,7 @@ configurations {
 	}
 }
 
+
 repositories {
 	mavenCentral()
 }
@@ -25,8 +26,8 @@ dependencies {
 	runtimeOnly 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' // DEPENDENCIA PARA LAYOUT DINAMICO thymeleaf
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
-	implementation 'org.springframework.boot:spring-boot-starter-validation' // DEPENDENCIA DE VALIDAÇÃO
-	runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' // Coloca dentro do thymeleaf a opção de acessar informações do usuario logado
+	implementation 'org.springframework.boot:spring-boot-starter-validation' // DEPENDENCIA DE VALIDAï¿½ï¿½O
+	runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' // Coloca dentro do thymeleaf a opï¿½ï¿½o de acessar informaï¿½ï¿½es do usuario logado
 	runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-java8time' // Dependencia para trabalhar com as classes java LocalDateTime no thymeleaf
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -35,6 +36,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
+
 
 test {
 	useJUnitPlatform()

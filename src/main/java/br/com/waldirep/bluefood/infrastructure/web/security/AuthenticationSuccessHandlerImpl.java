@@ -12,15 +12,15 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import br.com.waldirep.bluefood.util.SecurityUtils;
 
 /**
- * Classe que direciona o usuario dependendo se a autenticação foi feita ou não
+ * Classe que direciona o usuario dependendo se a autenticaï¿½ï¿½o foi feita ou nï¿½o
  * @author wepbi
  *
  */
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler{
 
 	/**
-	 * Metodo para fazer o direcionamento final para encerrar o processo de autenticação
-	 * Quando esse metodo e chamado, a autenticação ja foi feita com sucesso
+	 * Metodo para fazer o direcionamento final para encerrar o processo de autenticaï¿½ï¿½o
+	 * Quando esse metodo e chamado, a autenticaï¿½ï¿½o ja foi feita com sucesso
 	 */
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -28,11 +28,11 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 		
 		Role role = SecurityUtils.loggedUser().getRole(); // Pegando o perfil de acesso do usuario logado
 		if(role == Role.CLIENTE) {
-			response.sendRedirect("cliente/home"); // Avisa ao navegador onde foi feita a requisição que tem que ser feito um direcionamento para esssa pagina
+			response.sendRedirect("cliente/home"); // Avisa ao navegador onde foi feita a requisiï¿½ï¿½o que tem que ser feito um direcionamento para esssa pagina
 		}else if (role == Role.RESTAURANTE) {
 			response.sendRedirect("restaurante/home");
 		} else {
-			throw new IllegalStateException("Erro na autenticação");
+			throw new IllegalStateException("Erro na autenticaÃ§Ã£o");
 		}
 	}
 

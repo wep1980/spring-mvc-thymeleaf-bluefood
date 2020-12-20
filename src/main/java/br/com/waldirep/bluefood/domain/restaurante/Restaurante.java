@@ -41,30 +41,30 @@ public class Restaurante extends Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 
-	@NotBlank(message = "O CNPJ não pode ser vazio")
-	@Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inválido")
+	@NotBlank(message = "O CNPJ nÃ£o pode ser vazio")
+	@Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato invÃ¡lido")
 	@Column(length = 14, nullable = false) // tamanho da coluna no banco de dados
 	private String cnpj;
 	
 	@Size(max = 80)
 	private String logotipo;
 	
-	@UploadConstraint(acceptedTypes = {FileType.PNG, FileType.JPG}, message = "O arquivo não é um arquivo de imagem válido") // Anotação de validação customizada
-	private transient MultipartFile logotipoFile; // transient -> o arquivo so fica armazenado em memoria, não armazena na tabela
+	@UploadConstraint(acceptedTypes = {FileType.PNG, FileType.JPG}, message = "O arquivo nÃ£o Ã© um arquivo de imagem vÃ¡lido") // Anotaï¿½ï¿½o de validaï¿½ï¿½o customizada
+	private transient MultipartFile logotipoFile; // transient -> o arquivo so fica armazenado em memoria, nï¿½o armazena na tabela
 	
-	@NotNull(message = "A taxa de entrega não pode ser vazia")
+	@NotNull(message = "A taxa de entrega nÃ£o pode ser vazia")
 	@Min(0) // Valor minimo de uma taxa de entrega 
 	@Max(99) // Valor maximo de uma taxa de entrega 
-	private BigDecimal taxaEntrega; // As vezes o arredondamento do double não fica muito bom
+	private BigDecimal taxaEntrega; // As vezes o arredondamento do double nï¿½o fica muito bom
 	
-	@NotNull(message = "O tempo de entrega não pode ser vazio")
+	@NotNull(message = "O tempo de entrega nÃ£o pode ser vazio")
 	@Min(0) // Valor minimo de uma taxa de entrega 
 	@Max(120) // Valor maximo de uma taxa de entrega 
 	private Integer tempoEntregaBase;
 	
 	
 	/**
-	 *  Na relacão muitos para muitos um dos lados sera o dono do relacionamento(ele que configura o relacionamento). Em uma relacão assim e gerada uma tabela extra
+	 *  Na relacï¿½o muitos para muitos um dos lados sera o dono do relacionamento(ele que configura o relacionamento). Em uma relacï¿½o assim e gerada uma tabela extra
 	 *  private Set<CategoriaRestaurante> categorias = new HashSet<>(0); -> Criar uma instancia de set, list, arrayList e sempre aconselhavel pois evita erros
 	 *  Relacionamento Bidirecional, assim como de restaurante a gente consegue chegar em categorias, de categoria podemos chegar em restaurantes
 	 */
@@ -75,7 +75,7 @@ public class Restaurante extends Usuario implements Serializable{
 			inverseJoinColumns = @JoinColumn(name = "categoria_restaurante_id")
 			)
 	@Size(min = 1, message = "O restaurante precisa ter pelo ao menos uma categoria")
-	@ToString.Exclude // Exclui do lombok da geração do toString a relação do restaurante com as categorias
+	@ToString.Exclude // Exclui do lombok da geraï¿½ï¿½o do toString a relaï¿½ï¿½o do restaurante com as categorias
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 	
 	
@@ -88,7 +88,7 @@ public class Restaurante extends Usuario implements Serializable{
 	 public void setLogotipoFileName() {
 		 
 		 if(getId() == null) {
-			 throw new IllegalStateException("É preciso primeiro gravar o registro");
+			 throw new IllegalStateException("Ã‰ preciso primeiro gravar o registro");
 		 }
 		 // "%04d" -> completa com 0 a esquerda ate que o tamanho fique 4
 		 this.logotipo = String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension()); //Forma o nome completo da imagem
@@ -103,7 +103,7 @@ public class Restaurante extends Usuario implements Serializable{
 	  */
 	 public String getCategoriasAsText() {
 		 
-		 // LinkedHashSet -> Coleção que mantem a ordem de inserção e não permite elementos duplicados
+		 // LinkedHashSet -> Coleï¿½ï¿½o que mantem a ordem de inserï¿½ï¿½o e nï¿½o permite elementos duplicados
 		 Set<String> strings = new LinkedHashSet<String>();
 		 
 		 for(CategoriaRestaurante categoria : categorias) {
@@ -113,7 +113,7 @@ public class Restaurante extends Usuario implements Serializable{
 	 }
 	 
 	 /**
-	  * A Regra de negocio é pegar cada digito do CEP somar todos e colocar no tempo de entrega base
+	  * A Regra de negocio ï¿½ pegar cada digito do CEP somar todos e colocar no tempo de entrega base
 	  * @param cep
 	  * @return
 	  */
