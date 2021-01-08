@@ -9,6 +9,8 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.stereotype.Component;
 
 import br.com.waldirep.bluefood.domain.cliente.Cliente;
@@ -44,53 +46,30 @@ public class InsertDataForTesting {
 	
 	
 
-	@EventListener // Ao iniciar a aplica��o o metodo sera invocado apos a inicializa��o
+	@EventListener // Ao iniciar a aplicação o metodo sera invocado apos a inicialização
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
-		Cliente[] clientes = clientes();
-		Restaurante[] restaurantes = restaurantes();
-		itensCardapio(restaurantes);
-		
-		Pedido p = new Pedido();
-		p.setData(LocalDateTime.now());
-		p.setCliente(clientes[0]);
-		p.setRestaurante(restaurantes[0]);
-		p.setStatus(Status.Producao);
-		p.setSubtotal(BigDecimal.valueOf(10));
-		p.setTaxaEntrega(BigDecimal.valueOf(2));
-		p.setTotal(BigDecimal.valueOf(12.0));
-		
-		Pedido p2 = new Pedido();
-		p2.setData(LocalDateTime.now());
-		p2.setCliente(clientes[0]);
-		p2.setRestaurante(restaurantes[0]);
-		p2.setStatus(Status.Producao);
-		p2.setSubtotal(BigDecimal.valueOf(11));
-		p2.setTaxaEntrega(BigDecimal.valueOf(3));
-		p2.setTotal(BigDecimal.valueOf(13.0));
-		
-		Pedido p3 = new Pedido();
-		p3.setData(LocalDateTime.now());
-		p3.setCliente(clientes[0]);
-		p3.setRestaurante(restaurantes[0]);
-		p3.setStatus(Status.Producao);
-		p3.setSubtotal(BigDecimal.valueOf(12));
-		p3.setTaxaEntrega(BigDecimal.valueOf(4));
-		p3.setTotal(BigDecimal.valueOf(14.0));
-		
-		Pedido p4 = new Pedido();
-		p4.setData(LocalDateTime.now());
-		p4.setCliente(clientes[0]);
-		p4.setRestaurante(restaurantes[0]);
-		p4.setStatus(Status.Producao);
-		p4.setSubtotal(BigDecimal.valueOf(13));
-		p4.setTaxaEntrega(BigDecimal.valueOf(5));
-		p4.setTotal(BigDecimal.valueOf(15.0));
-		
-		pedidoRespository.save(p);
-		pedidoRespository.save(p2);
-		pedidoRespository.save(p3);
-		pedidoRespository.save(p4);
+		/**
+		 * Controla o profile para executar o codigo, esse codigo so é executado se o profile for "dev"
+		 */
+		Environment environment = event.getApplicationContext().getEnvironment();
+		if(environment.acceptsProfiles(Profiles.of("dev"))) {
+			
+			Cliente[] clientes = clientes();
+			Restaurante[] restaurantes = restaurantes();
+			itensCardapio(restaurantes);
+			
+			Pedido p = new Pedido();
+			p.setData(LocalDateTime.now());
+			p.setCliente(clientes[0]);
+			p.setRestaurante(restaurantes[0]);
+			p.setStatus(Status.Producao);
+			p.setSubtotal(BigDecimal.valueOf(10));
+			p.setTaxaEntrega(BigDecimal.valueOf(2));
+			p.setTotal(BigDecimal.valueOf(12.0));
+			pedidoRespository.save(p);
+			
+		}
 	}
 	
 	
