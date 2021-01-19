@@ -19,6 +19,7 @@ e o tempo estimado para entrega do pedido. No carrinho de compras o pagamento é
 
 # Tecnologias utilizadas
 ## Back end
+- Domain-Driven Design (DDD)
 - JavaEE
 - Spring Boot
 - Spring Security
