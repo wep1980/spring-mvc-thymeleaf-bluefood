@@ -33,6 +33,7 @@ e o tempo estimado para entrega do pedido. No carrinho de compras o pagamento é
 - Postman
 - Uplaod de imagens
 - Lombok
+- Testes unitarios G-UNIT
 ## Front end
 - HTML 5
 - CSS
